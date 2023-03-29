@@ -1,11 +1,28 @@
 import Head from 'next/head'
-import Image from 'next/image'
+//import Image from 'next/image'
+import Link from 'next/link'
 import { Inter } from '@next/font/google'
-import styles from '@/styles/Home.module.css'
+//import styles from '@/styles/Home.module.css'
+import { loadPosts } from '../pages/api/posts'
 
+
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 const inter = Inter({ subsets: ['latin'] })
 
-export default function Home() {
+export async function getStaticProps() {
+  // Carga los primeros 10 posts de Sanity
+  const { posts } = await loadPosts(0, 9);
+  if (!Array.isArray(posts)) {
+    return <div>Error: No se encontraron publicaciones</div>;}
+  // Devuelve los datos obtenidos como props para la página
+
+  return {props: {posts}};
+}
+
+export default function Home({posts}) {
+
+  console.log(posts)
+
   return (
     <>
       <Head>
@@ -14,9 +31,19 @@ export default function Home() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <main className={styles.main}>
-      <h1> Hola </h1>
-      </main>
+      <h1> Home </h1>
+
+{posts.length > 0 && posts.map((post) => (
+  <div key={post._id}>
+    <h2>{post.title}</h2>
+    <p>{post._id}</p>
+    <Link href={`/post/${post.slug.current}`}><span>{post.title}</span></Link>
+    <p>{post.description}</p>
+    <p>{post.publishDate}</p>
+    <img src={post.image?.asset.url} alt={post.title} />
+  </div>
+))}
+
     </>
   )
 }
