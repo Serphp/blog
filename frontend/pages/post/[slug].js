@@ -1,7 +1,7 @@
 import groq from 'groq'
 import imageUrlBuilder from '@sanity/image-url'
 import React from 'react';
-import { client } from '../../lib/client'
+import { client } from '../../lib/client';
 
 const PortableText = require('@portabletext/react').PortableText;
 const toolkit = require('@portabletext/toolkit');
@@ -41,30 +41,26 @@ const toolkit = require('@portabletext/toolkit');
     console.log(post);
 
     return (
-        <article>
-        <h1>{title}</h1>
+        <section className='contenedor'>
+            <div className='post'> 
+        <h1 className='post__header'>{title}</h1>
         <span>By {name}</span>
         {categories && (
-            <ul>
-            Posted in
-            {categories.map(category => <li key={category}>{category}</li>)}
-            </ul>
+            <div>
+            Posted in {categories.map(category => <span key={category}>{category}</span>)}
+            </div>
         )}
         {authorImage && (
-            <div>
-            <img
-                src={urlFor(authorImage)
-                .width(50)
-                .url()}
-                alt={`${name}'s picture`}
-            />
+            <div className='cavatar'>
+            <img className='imgavatar' src={urlFor(authorImage)} title={`${name}'s picture`} />
             </div>
         )}
         <PortableText
             value={body}
             components={ptComponents}
         />
-        </article>
+        </div> 
+        </section>
     )
     }
 
