@@ -1,11 +1,11 @@
+/* eslint-disable react/prop-types */
 import groq from 'groq'
 import imageUrlBuilder from '@sanity/image-url'
 import React from 'react';
 import { client } from '../../lib/client';
 
 const PortableText = require('@portabletext/react').PortableText;
-const toolkit = require('@portabletext/toolkit');
-//const LIST_NEST_MODE_HTML = toolkit.LIST_NEST_MODE_HTML;
+//const toolkit = require('@portabletext/toolkit');
 
     function urlFor (source) {
         return imageUrlBuilder(client).image(source)
@@ -30,15 +30,14 @@ const toolkit = require('@portabletext/toolkit');
     }
     }
 
-    const Post = ({post}) => {
-    const {
-        title = 'Missing title',
-        name = 'Missing name',
-        categories,
-        authorImage,
-        body = []
-    } = post
-    console.log(post);
+    const Post = ({ post }) => {
+    if (!post || !post.title) {
+        return <div>Loading...</div>;
+    }
+    
+    const { title, name = "Missing name", categories, authorImage, body = [] } = post;
+    
+    //console.log(post);
 
     return (
         <section className='contenedor'>

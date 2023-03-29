@@ -15,7 +15,7 @@ interface PostsProps {
 }
 
 const Home = ({ posts }: PostsProps) => {
-  console.log(posts);
+  //console.log(posts);
 
   return (
     <div>
