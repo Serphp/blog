@@ -1,6 +1,7 @@
+//import React from "react";
 import Link from "next/link";
 
-export function Navbar() {
+export default function Navbar() {
 //const { user, logout } = useAuth();
 //const [show, setShow] = useState(false);
 //const router = useRouter();

@@ -1,12 +1,13 @@
-import sanityClient from '@sanity/client';
+//import sanityClient from '@sanity/client';
 import imageUrlBuilder from "@sanity/image-url"; 
+import { createClient } from '@sanity/client';
 
 export const clientConfig = {
     projectId: 'bip4b9dx',
     dataset: 'serphnotes',
 }
 
-const client = sanityClient({
+const client = createClient({
     projectId: clientConfig.projectId,
     dataset: clientConfig.dataset,
     apiVersion: '2022-10-11',
