@@ -1,7 +1,8 @@
 import Link from 'next/link';
 import groq from 'groq';
 import { client } from '../lib/client';
-//import { ReactNode } from 'react';
+import { useContext } from 'react';
+import { PostContext } from './components/Context/PostContext';
 
 interface Post {
   _id: string;
@@ -15,7 +16,7 @@ interface PostsProps {
 }
 
 const Home = ({ posts }: PostsProps) => {
-  //console.log(posts);
+  const { handleTheme } = useContext(PostContext);
 
   return (
     <>

@@ -1,15 +1,33 @@
-import { React, createContext, useState } from 'react';
+import { React, createContext, useState, useEffect } from 'react';
 
 export const PostContext = createContext();
 
-// eslint-disable-next-line react/prop-types
 export const PostContextProvider = ({ children }) => {
-    const [count, setCount] = useState(0);
-    const incrementCount = () => setCount(count + 1);
+const [theme, setTheme] = useState('none');
+const [isLoading, setIsLoading] = useState(true);
 
-    return (
-    <PostContext.Provider value={{ count, incrementCount }}>
-        {children}
-    </PostContext.Provider>
-    );
+useEffect(() => {
+    const localTheme = window.localStorage.getItem('theme');
+    localTheme && setTheme(localTheme);
+    setIsLoading(false);
+}, []);
+
+const handleTheme = () => {
+    setTheme((prevTheme) => {
+    const newTheme = prevTheme === 'light' ? 'dark' : 'light';
+    window.localStorage.setItem('theme', newTheme);
+    //console.log(theme)
+    return newTheme;
+});
+};
+
+const toggleTheme = () => {
+    setTheme((prevTheme) => (prevTheme === 'light' ? 'dark' : 'light'));
+};
+
+return (
+<PostContext.Provider value={{ theme, setTheme, handleTheme, toggleTheme }}>
+    {isLoading ? <div>Loading...</div> : children}
+</PostContext.Provider>
+);
 };
