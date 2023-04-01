@@ -41,9 +41,17 @@ const PortableText = require('@portabletext/react').PortableText;
 
     return (
         <section className='contenedor'>
-            <div className='post'> 
-        <h1 className='post__header'>{title}</h1>
-        <span>By {name}</span>
+        <div className='post'> 
+                                                        <div className='actions_bar'> 
+                                                        <div className='actions'>
+                                                        <a href='/' className='icon'>Zoom</a>
+                                                        <a href='/' className='icon'>Black</a>
+                                                        </div>
+                                                        </div>
+        <div className='post__header'>
+        <span className='titlepost'>{title}</span>
+        <span className='author'>By {name}</span>
+        </div>
         {categories && (
             <div>
             Posted in {categories.map(category => <span key={category}>{category}</span>)}

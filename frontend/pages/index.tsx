@@ -18,20 +18,29 @@ const Home = ({ posts }: PostsProps) => {
   //console.log(posts);
 
   return (
-    <div>
-      <h1>Welcome to a blog! - {posts.length}</h1>
+    <>
+    <label> 
+      <p>Welcome to a blog! <span className='count'>{posts.length}</span></p>
+    </label>
+
+      <div className='comcard'>
       {posts.length > 0 &&
-        posts.map(({ _id, title = '', slug = { current: '' }, publishedAt = '' }) =>
+        posts.map(({ _id, title = '',slug = { current: '' }, publishedAt = '' }) =>
           slug.current ? (
-            <li key={_id}>
+            <div key={_id}> 
+              <div className='card2'>
               <Link href="/post/[slug]" as={`/post/${slug.current}`}>
-                {title}
-              </Link>{' '}
-              ({new Date(publishedAt).toDateString()})
-            </li>
+                <span className='title' >{title}</span> 
+              </Link><br/>
+              {publishedAt && (
+                <span className='date'>{new Date(publishedAt).toDateString()}</span>
+              )} 
+              </div>
+            </div>
           ) : null
         )}
-    </div>
+        </div>
+        </>
   );
 };
 

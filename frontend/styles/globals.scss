@@ -1,14 +1,50 @@
 @import 'post.scss';
 
-body {
-  font-family: 'Roboto', sans-serif;
-  font-size: 16px;
-  line-height: 1.5;
-  background: url('https://images.unsplash.com/photo-1564951434112-64d74cc2a2d7?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80');
-  background-size: cover;
-  background-repeat: no-repeat;
-  background-attachment: fixed;
-  background-position: center;
-  background-color: #646464;
+:root{
 
+  a {
+    text-decoration: none;
+    color: #333;
+  }
+}
+
+body {
+  background-color:  rgba(66, 143, 118, 0.38);
+  font-family: 'Roboto', sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+footer {
+  background-color: #08915f16;
+  color: #fff;
+  text-align: center;
+  padding: 1rem;
+  margin-top: 1rem;
+}
+
+Nav {
+  background-color: #08915f16;
+  color: #fff;
+  text-align: center;
+  padding: 1rem;
+  //margin-top: 1rem;
+}
+
+.nav-text {
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin-left: 10px;
+  color: #3333339f;
+  margin-bottom: 1rem;
+  text-align: center;
+  border-bottom: #fff solid 1px;
+  padding-bottom: 1rem;
+  opacity: 0.5;
+  transition: all 0.3s ease-in-out;
+  &:hover {
+    opacity: 1;
+    color: #03434293;
+    border-bottom: #fff solid 2px;
+  }
 }

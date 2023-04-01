@@ -2,28 +2,15 @@
 import Link from "next/link";
 
 export default function Navbar() {
-//const { user, logout } = useAuth();
-//const [show, setShow] = useState(false);
-//const router = useRouter();
-
-// const handleLogout = async () => {
-// await logout();
-// router.push("/");
-// };
-
 return (
-<nav className="contenedor">
+<nav>
     <div className="">
-    <Link href="/">
-        <span className=""> Home </span>
-    </Link>
-    <button
-        className=""
-        type="button"
-        //onClick={() => setShow(!show)}
-    >
-        <span className=""></span>
-    </button>
+        <Link href="/">
+            <span className="nav-text"> Home </span>
+        </Link>
+        <Link href="/about">
+            <span className="nav-text"> About </span>
+        </Link>
     </div>
     </nav>)
 }
