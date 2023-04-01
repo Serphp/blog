@@ -12,7 +12,7 @@ const texts = [
 export default function Footer() {
   const [texto, setTexto] = useState("");
   const [isMoving, setIsMoving] = useState(false); // estado que indica si el gif se está moviendo o noado que contiene el texto actual que se muestra
-  const timeoutRef = useRef(null); // referencia a un timer que detendrá el movimiento del gif
+  const timeoutRef = useRef<NodeJS.Timeout | null>(null);
   //const [playing , setPlaying] = useState(false); // estado que indica si el gif se está moviendo o no
   const [showText, setShowText] = useState(false); // estado que indica si el texto se está mostrando o no
 
@@ -24,7 +24,9 @@ export default function Footer() {
     }, 1000);
     setIsMoving(true); // empezar a mover el gif
     setTexto(texts[Math.floor(Math.random() * texts.length)]); 
-    clearTimeout(timeoutRef.current);
+    if (timeoutRef.current) {
+      clearTimeout(timeoutRef.current);
+    }
     timeoutRef.current = setTimeout(() => setIsMoving(false), 1000);
   };
 
