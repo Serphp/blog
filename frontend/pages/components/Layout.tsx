@@ -10,7 +10,7 @@ export default function Layout({ children }: LayoutProps): JSX.Element {
     return (
     <>
         <Navbar />
-        {children}
+            {children}
         <Footer />
     </>
     );

@@ -5,6 +5,7 @@ export const PostContext = createContext();
 export const PostContextProvider = ({ children }) => {
 const [theme, setTheme] = useState('none');
 const [isLoading, setIsLoading] = useState(true);
+const [score, setScore] = useState(0);
 
 useEffect(() => {
     const localTheme = window.localStorage.getItem('theme');
@@ -26,7 +27,7 @@ const toggleTheme = () => {
 };
 
 return (
-<PostContext.Provider value={{ theme, setTheme, handleTheme, toggleTheme }}>
+<PostContext.Provider value={{ theme, setTheme, handleTheme, toggleTheme, score, setScore }}>
     {isLoading ? <div>Loading...</div> : children}
 </PostContext.Provider>
 );
