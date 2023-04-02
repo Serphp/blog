@@ -7,10 +7,10 @@
     justify-content: center;
     margin: 20px;
     padding: 20px;
-    background-color: #f5f5f575;
-    border: 1px solid #ccc;
+    background-color: #f5f5f563;
+    //border: 1px solid #ccc;
     border-radius: 5px;
-    box-shadow: 0 0 10px #ccc;
+    box-shadow: 0 0 10px #dddddd64;
     text-align: center;
     font-size: 1.2em;
     color: #333;
@@ -106,8 +106,8 @@
     }
 
     .thinkcont {
+        position: absolute;
         display: flex;
-        width: 100%;
         justify-content: center;
         align-items: center;
         opacity: 0.5;

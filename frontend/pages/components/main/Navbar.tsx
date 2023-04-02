@@ -17,6 +17,9 @@ return (
         <Link href="/about">
             <span className="nav-text"> About </span>
         </Link>
+        <Link href="/categories">
+            <span className="nav-text"> Categories </span>
+        </Link>
     </div>
 
     <button className='toggletheme' onClick={handleTheme}>
