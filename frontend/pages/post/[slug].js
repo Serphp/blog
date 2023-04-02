@@ -1,7 +1,7 @@
 /* eslint-disable react/prop-types */
 import groq from 'groq'
 import imageUrlBuilder from '@sanity/image-url'
-import React from 'react';
+import React, { useState } from 'react';
 import { client } from '../../lib/client';
 
 const PortableText = require('@portabletext/react').PortableText;
@@ -37,17 +37,46 @@ const PortableText = require('@portabletext/react').PortableText;
     
     const { title, name = "Missing name", categories, authorImage, body = [] } = post;
     
+    const [fontSize, setFontSize] = useState('medium');
+    const fontSizes = ['small', 'medium', 'large'];
+
+    const handleZoom = () => {
+    const currentIndex = fontSizes.indexOf(fontSize);
+    const nextIndex = currentIndex + 1 >= fontSizes.length ? 0 : currentIndex + 1;
+    setFontSize(fontSizes[nextIndex]);
+    };
+
+    const handleShare = () => {
+    if (navigator.share) {
+        navigator.share({
+        title: document.title,
+        url: window.location.href,
+        })
+        .then(() => console.log('Se compartió con éxito'))
+        .catch((error) => alert(`Error al compartir: ${error}`));
+    }
+    };
+    
+const handlePrint = () => {
+    window.print();
+    };
+
     //console.log(post);
 
     return (
+
+        
         <section className='contenedor'>
+        <div className='actions_bar'> 
+            <div className='ipostcontent'>
+            <button className='ipost' onClick={handleZoom}>Zoom</button>
+            <button className='ipost'onClick={handleShare}>Share</button>
+            <button className='ipost' onClick={handlePrint}>Print</button>
+            </div>
+        </div>
+
         <div className='post'> 
-            <div className='actions_bar'> 
-            <div className='actions'>
-            <a href='/' className='icon'>Zoom</a>
-            <a href='/' className='icon'>Black</a>
-            </div>
-            </div>
+
         <div className='post__header'>
         <span className='titlepost'>{title}</span>
         <span className='author'>By {name}</span>
@@ -62,10 +91,12 @@ const PortableText = require('@portabletext/react').PortableText;
             <img className='imgavatar' src={urlFor(authorImage)} title={`${name}'s picture`} />
             </div>
         )}
-        <PortableText
-            value={body}
-            components={ptComponents}
-        />
+        <div className='post__body'>
+            <div className='content' style={{ fontSize: fontSize }}>
+        <PortableText value={body} components={ptComponents}/>
+            </div>
+        </div>
+
         </div> 
         </section>
     )

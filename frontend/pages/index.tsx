@@ -3,10 +3,12 @@ import groq from 'groq';
 import { client } from '../lib/client';
 import { useContext } from 'react';
 import { PostContext } from './components/Context/PostContext';
+import { getCategories } from './api/categorie';
 
 interface Post {
   _id: string;
   title: string;
+  categories: string;
   slug: { current: string };
   publishedAt: string;
 }
@@ -17,6 +19,7 @@ interface PostsProps {
 
 const Home = ({ posts }: PostsProps) => {
   const { handleTheme } = useContext(PostContext);
+  console.log(getCategories);
 
   return (
     <>
@@ -36,6 +39,7 @@ const Home = ({ posts }: PostsProps) => {
               {publishedAt && (
                 <span className='date'>{new Date(publishedAt).toDateString()}</span>
               )} 
+              
               </div>
             </div>
           ) : null
@@ -46,14 +50,19 @@ const Home = ({ posts }: PostsProps) => {
 };
 
 export async function getStaticProps() {
-  const posts: Post[] = await client.fetch(groq`
-    *[_type == "post" && publishedAt < now()] | order(publishedAt desc)
+  const postsAndCategories = await client.fetch(groq`
+    {
+      "posts": *[_type == "post" && publishedAt < now()] | order(publishedAt desc),
+      "categories": *[_type == "category"]
+    }
   `);
+  const { posts, categories } = postsAndCategories;
+  
   return {
     props: {
       posts,
+      categories,
     },
   };
 }
-
 export default Home;
