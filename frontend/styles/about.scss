@@ -72,14 +72,40 @@
         text-align: center;
     } 
 
-    .social { 
+    .bar {
+        border-top: #d4d4d413 3px solid;
+    }
+
+    .social2 {
         display: flex;
         justify-content: center;
         align-items: center;
         margin: -3px 0 0 0;
-        border-top: #d4d4d413 3px solid;
         border-radius: 10px 10px 0 0;
         padding-top: 20px;
+        a { 
+            display: inline-block; 
+            width: 40px; 
+            height: 40px; 
+            border-radius: 10px; 
+            color: #fff; 
+            text-align: center; 
+            line-height: 40px; 
+            margin-right: 10px;
+            transition: all 1s ease-in-out; 
+            &:hover { 
+                transform: scale(1.2);
+                border-bottom: #333 2px solid;
+                color: #ccc;
+            }
+        }
+    }
+
+    .social { 
+        margin: -3px 0 0 0;
+        @media screen and (max-width: 768px) {
+            display: none;
+        }
         a { 
             display: inline-block; 
             width: 40px; 

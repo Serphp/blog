@@ -48,7 +48,11 @@ return (
     title='dont touch me!'/>
 </div>
 
+  <div className='bar'></div>
+
+
   <Social/>
+  
 
     <style jsx>{`
   .moving {

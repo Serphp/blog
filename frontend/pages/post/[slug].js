@@ -86,7 +86,7 @@ const handlePrint = () => {
 
 
         </div>
-    <section className="p-10 md-p-l0">
+    <section className="p-10 md-p-10">
             <div className="card3 flex flex-wrap md-justify-between md-items-center">
             <div className="flex items-center">
                 <img className="imgavatar w-40 h-40 br-50 mr-5" src={urlFor(authorImage).width(100).height(100).fit('max').auto('format')} alt={name} />
@@ -115,7 +115,9 @@ const handlePrint = () => {
 
         </div>
     </section>
+    <div className='p-10'></div>
         </section>
+        
     )
     }
 

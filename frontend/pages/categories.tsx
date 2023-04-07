@@ -18,7 +18,7 @@ const Categories = ({ categories  }: CategoryProps) => {
         <div key={_id}> 
             <div className='card2'>
             <Link href="/post/[slug]" as={`/categories/${slug?.current}`}>
-            <span className='title' >{title}</span> 
+            <span className='paragraph2' >{title}</span> 
             </Link><br/>
             </div>
         </div>
