@@ -50,3 +50,31 @@ body {
   margin: 0 0 20px 0;
   text-align: center;
 }
+
+.imput {
+  background-color: #ffffff61;
+  opacity: 0.8;
+  font-family: Fellix, sans-serif;
+  color: #ffffff;
+  margin: 10px 0 20px 0;
+  text-align: center;
+  width: 40%;
+  height: 20px;
+  border-radius: 5px;
+  padding: 10px;
+  border: none;
+  //border-bottom: #b8b8b8 1px solid;
+  transition: all 1s ease-in-out;
+    &:hover {
+      background-image: url('https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.freepik.es%2Ffotos-');
+      height: 40px;
+      font-size: 1rem;
+      //line-height: 1.5;
+      color: #000000;
+      opacity: 1;
+      //border: #b8b8b8 1px solid;
+    }
+    &:focus {
+      outline: none;
+    }
+}
