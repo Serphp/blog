@@ -86,7 +86,7 @@
         justify-content: center;
         align-items: center;
         margin: -3px 0 0 0;
-        border-top: #333 3px solid;
+        border-top: #d4d4d413 3px solid;
         border-radius: 10px 10px 0 0;
         padding-top: 20px;
         a { 
@@ -98,9 +98,11 @@
             text-align: center; 
             line-height: 40px; 
             margin-right: 10px;
-            transition: border-bottom 1s ease-in-out; 
+            transition: all 1s ease-in-out; 
             &:hover { 
+                transform: scale(1.2);
                 border-bottom: #333 2px solid;
+                color: #ccc;
             }
         }
     }
@@ -123,11 +125,4 @@
             padding: 10px;
             border-radius: 8px 8px 8px 0;
         }
-}
-
-.cat {
-    cursor: pointer;
-    font-size: 16px;
-    //background-color: #333;
-    border-radius: 20px 20px 0 20px;
 }
