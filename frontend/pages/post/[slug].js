@@ -70,7 +70,7 @@ const handlePrint = () => {
 <section className='contenedor'>
 <div className='actions_bar'> 
             <div className='ipostcontent'>
-            <button className='ipost' onClick={handleZoom}>Zoom</button>
+            <button className='button ipost' onClick={handleZoom}>Zoom</button>
             <button className='ipost'onClick={handleShare}>Share</button>
             <button className='ipost' onClick={handlePrint}>Print</button>
             <button className="button bg-pink">
@@ -83,28 +83,30 @@ const handlePrint = () => {
             <ion-icon name="search" size="small" class="ml-3"></ion-icon>
             </button>
             </div>
+
+
         </div>
     <section className="p-10 md-p-l0">
+            <div className="card3 flex flex-wrap md-justify-between md-items-center">
+            <div className="flex items-center">
+                <img className="imgavatar w-40 h-40 br-50 mr-5" src={urlFor(authorImage).width(100).height(100).fit('max').auto('format')} alt={name} />
+                <span className="opacity-40 fs-m1 fw-600">{name}</span>
+            </div>
+            <div className="flex items-center mt-5 md-mt-0">
+                <span className="opacity-40 fs-m1 fw-600 mr-5">Categories:</span>
+                <div className="flex flex-wrap">
+                    {categories.map((category, index) => (
+                        <span key={index} className="opacity-40 fs-m1 fw-600 mr-5">{category}</span>
+                    ))}
+                </div>
+            </div>
+        </div>
+
         <div className="br-8 bg-indigo-lightest-10 p-10 md-p-l0 flex flex-wrap md-justify-between md-items-center">
             <div className="w-100pc">
-                <h1 className='welcome'> {title} </h1>
-
-                <div className="card2 flex flex-wrap md-justify-between md-items-center">
-                    <div className="flex items-center">
-                        <img className="imgavatar w-40 h-40 br-50 mr-5" src={urlFor(authorImage).width(100).height(100).fit('max').auto('format')} alt={name} />
-                        <span className="black opacity-40 fs-m1 fw-600">{name}</span>
-                    </div>
-                    <div className="flex items-center mt-5 md-mt-0">
-                        <span className="black opacity-40 fs-m1 fw-600 mr-5">Categories:</span>
-                        <div className="flex flex-wrap">
-                            {categories.map((category, index) => (
-                                <span key={index} className="black opacity-40 fs-m1 fw-600 mr-5">{category}</span>
-                            ))}
-                        </div>
-                    </div>
-                </div>
+                <h1 className='title'> {title} </h1>
                 
-                <p className="fw-600 black opacity-50">
+                <p className="fw-600 opacity-50">
                 <div className='content' style={{ fontSize: fontSize }}>
                     <PortableText value={body} components={ptComponents}/>
                 </div>
