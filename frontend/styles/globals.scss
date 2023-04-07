@@ -23,6 +23,42 @@ body {
   }
 }
 
+//keyframe scale animation
+@keyframes scale {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.1);
+    background-color: #ffffffe8;
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+.buttonabsolute {
+  position: absolute;
+  width: 45px;
+  height: 40px;
+  right: 0;
+  bottom: 0;
+  margin: 5px;
+  padding: 5px;
+  border-radius: 5px;
+  background-color: #ffffff86;
+  color: #ffffff;
+  animation: scale 1s ease-in-out infinite;
+  transition: all 0.3s ease-in-out;
+  &:hover {
+
+    scale: 1.1;
+    background-color: #ffffff78;
+    font-size: 20px;
+    font-weight: bolder;
+    color: #ffffff;
+  }
+}
 
 .paragraph {
   font-family: Fellix, sans-serif;

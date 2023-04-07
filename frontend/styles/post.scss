@@ -62,21 +62,21 @@
     position: absolute;
     top: 0;
     opacity: 0.5;
-    margin: -8px;
+    margin: -8px 0 0 0;
     border-radius: 0 0 5px 5px;
     @media screen and (max-width: 768px) {
         position: relative;
     }
     .ipost {
         background-color: #333;
-        margin: 5px;
+        margin: 5px 10px 0 0;
         color: #fff;
         padding: 10px;
         border-radius: 5px;
         transition: all 0.3s ease-in-out;
     &:hover {
-        background-color: #fff;
-        color: #333;
+        background-color: #ffffff86;
+        color: #ffffff;
     }
 }
 }

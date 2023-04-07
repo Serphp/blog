@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/rules-of-hooks */
 /* eslint-disable react/prop-types */
 import groq from 'groq'
 import imageUrlBuilder from '@sanity/image-url'
@@ -35,18 +36,59 @@ const PortableText = require('@portabletext/react').PortableText;
     if (!post || !post.title) {
         return <div>Loading...</div>;
     }
-    
+    //constantes
     const { title, name = "Missing name", categories, authorImage, publishedAt, body = [] } = post;
     const postDate = moment(publishedAt).fromNow();
+
+    const [selectedText, setSelectedText] = useState('');
+    const [isButtonVisible, setIsButtonVisible] = useState(false);
+    const [buttonPosition, setButtonPosition] = useState({ top: 0, left: 0 });
     // eslint-disable-next-line react-hooks/rules-of-hooks
     const [fontSize, setFontSize] = useState('medium');
     const fontSizes = ['small', 'medium', 'large'];
-
     const handleZoom = () => {
     const currentIndex = fontSizes.indexOf(fontSize);
     const nextIndex = currentIndex + 1 >= fontSizes.length ? 0 : currentIndex + 1;
     setFontSize(fontSizes[nextIndex]);
     };
+
+    //Logica de remarcado de texto
+    // eslint-disable-next-line react-hooks/rules-of-hooks
+
+    const DetectText = () => {
+        const selection = window.getSelection();
+        const selectedText = selection.toString();
+      
+        // Ocultar el botón si no hay texto seleccionado
+        if (selectedText.length === 0) {
+          setIsButtonVisible(false);
+        }
+      
+        // Remover el event listener para evitar que se siga ejecutando innecesariamente
+        document.removeEventListener("mouseup", DetectText);
+      };
+
+      const HTextSelect = () => {
+        const selection = window.getSelection();
+        const text = selection.toString();
+        setSelectedText(text);
+        setIsButtonVisible(true);
+    
+        const range = selection.getRangeAt(0);
+        const rect = range.getBoundingClientRect();
+        setButtonPosition({ top: rect.top - 30, left: rect.left + rect.width / 2 });
+        document.addEventListener("mouseup", DetectText);
+      };
+
+    const HMarktext = () => {
+        const selection = window.getSelection();
+        const range = selection.getRangeAt(0);
+        const newNode = document.createElement('span');
+        newNode.style.backgroundColor = 'yellow';
+        range.surroundContents(newNode);
+        setIsButtonVisible(false);
+    };
+      //End Logica de remarcado de texto
 
     const handleShare = () => {
     if (navigator.share) {
@@ -56,34 +98,26 @@ const PortableText = require('@portabletext/react').PortableText;
         })
         .then(() => console.log('Se compartió con éxito'))
         .catch((error) => alert(`Error al compartir: ${error}`));
-    }
+        }
     };
     
-const handlePrint = () => {
-    window.print();
-    };
+    const handlePrint = () => {window.print();};
+    
+    
+return (    
+<section className=''>
 
-    console.log(post);
 
-    return (
-
-        
-<section className='contenedor'>
 <div className='actions_bar'> 
-            <div className='ipostcontent'>
-            <button className='button ipost' onClick={handleZoom}>Zoom</button>
-            <button className='ipost'onClick={handleShare}>Share</button>
-            <button className='ipost' onClick={handlePrint}>Print</button>
-            <button className="button bg-pink">
-            <span className="input-icon">
-            <ion-icon name="heart" size="small"></ion-icon>
-            </span>
-            </button>
-            <button className="button">
-            SEARCH
-            <ion-icon name="search" size="small" class="ml-3"></ion-icon>
-            </button>
-            </div>
+<div className='ipostcontent'>
+
+<button className='button ipost' onClick={handleZoom}>Zoom</button>
+<button className='ipost'onClick={handleShare}>Share</button>
+<button className='ipost' onClick={handlePrint}>Print</button>
+<button className="ipost button bg-pink"><span className="input-icon"><ion-icon name="heart" size="small"></ion-icon></span></button>
+<button className="ipost button">SEARCH<ion-icon name="search" size="small" class="ml-3"></ion-icon></button>
+
+</div>
 
 
         </div>
@@ -108,8 +142,11 @@ const handlePrint = () => {
                 <h1 className='title'> {title} </h1>
                 
                 <p className="fw-600 opacity-50 m-10">
-                <div className='content' style={{ fontSize: fontSize }}>
+                <div className='content' onMouseUp={HTextSelect} style={{ fontSize: fontSize }}>
                     <PortableText value={body} components={ptComponents}/>
+                    {isButtonVisible && (
+                        <button className='buttonabsolute' onClick={HMarktext}>+</button>
+                    )}
                 </div>
                 </p>
             </div>
