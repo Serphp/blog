@@ -19,13 +19,19 @@ interface PostsProps {
   categories: { title: string }[];
 }
 
+interface EventProps {
+  target: {
+    value: React.SetStateAction<string>;
+  };
+}
+
 const Home = ({ posts, categories }: PostsProps) => {
   const [searchTerm, setSearchTerm] = useState('');
   const filteredPosts = posts.filter((post) => {
     return post.title.toLowerCase().includes(searchTerm.toLowerCase());
   });
 
-  const handleSearch = (event) => {
+  const handleSearch = (event: EventProps) => {
     setSearchTerm(event.target.value);
   };
 

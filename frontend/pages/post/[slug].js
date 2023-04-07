@@ -40,9 +40,9 @@ const PortableText = require('@portabletext/react').PortableText;
     const { title, name = "Missing name", categories, authorImage, publishedAt, body = [] } = post;
     const postDate = moment(publishedAt).fromNow();
 
-    const [selectedText, setSelectedText] = useState('');
+    const [setSelectedText] = useState(''); //selectedText, 
     const [isButtonVisible, setIsButtonVisible] = useState(false);
-    const [buttonPosition, setButtonPosition] = useState({ top: 0, left: 0 });
+    const [setButtonPosition] = useState({ top: 0, left: 0 }); //buttonPosition
     // eslint-disable-next-line react-hooks/rules-of-hooks
     const [fontSize, setFontSize] = useState('medium');
     const fontSizes = ['small', 'medium', 'large'];
@@ -146,6 +146,7 @@ return (
                     <PortableText value={body} components={ptComponents}/>
                     {isButtonVisible && (
                         <button className='buttonabsolute' onClick={HMarktext}>+</button>
+                        
                     )}
                 </div>
                 </p>
