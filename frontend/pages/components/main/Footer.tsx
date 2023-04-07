@@ -12,6 +12,7 @@ const texts = [
 export default function Footer() {
   const [texto, setTexto] = useState("");
   const [isMoving, setIsMoving] = useState(false); // estado que indica si el gif se está moviendo o noado que contiene el texto actual que se muestra
+  // eslint-disable-next-line no-undef
   const timeoutRef = useRef<NodeJS.Timeout | null>(null);
   //const [playing , setPlaying] = useState(false); // estado que indica si el gif se está moviendo o no
   const [showText, setShowText] = useState(false); // estado que indica si el texto se está mostrando o no

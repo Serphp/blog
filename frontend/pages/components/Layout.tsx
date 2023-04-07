@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 import { ReactNode } from 'react';
 import Navbar from '../components/main/Navbar';
 import Footer from '../components/main/Footer';
