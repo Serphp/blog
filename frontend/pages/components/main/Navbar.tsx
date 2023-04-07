@@ -14,7 +14,7 @@ return (
 <nav className="flex flex-column md-flex-row px-10">
     <div className="flex justify-between">
         <span className="flex items-center p-10 mr-5">
-            <img className="max-h-l3 w-auto hover-scale-up-1 ease-300" src="https://i.imgur.com/pimVkwe.png"/>
+            <img className="max-h-l3 w-auto hover-scale-up-3 ease-300" src="https://i.imgur.com/pimVkwe.png"/>
             Hola
             </span>
         <a data-toggle="toggle-nav" data-target="#nav-items" href="#"
@@ -26,10 +26,10 @@ return (
             </div>
         </a>
     </div>
-    <div id="nav-items" className="hidden flex sm-w-100pc flex-column md-flex md-flex-row md-justify-start items-center">
-        <a href="/" className="fs-s1 mx-3 py-3 white no-underline hover-underline">Home</a>
-        <a href="/about" className="fs-s1 mx-3 py-3 white no-underline hover-underline">About</a>
-        <a href="/categories" className="fs-s1 mx-3 py-3 white no-underline hover-underline">Pricing</a>
+    <div id="nav-items" className=" flex sm-w-100pc flex-column md-flex md-flex-row md-justify-start items-center">
+        <Link href="/" className="nav-text fs-s1 mx-3 py-3 white no-underline">Home</Link>
+        <Link href="/about" className="nav-text fs-s1 mx-3 py-3 white no-underline">About</Link>
+        <Link href="/categories" className="nav-text fs-s1 mx-3 py-3 white no-underline">Pricing</Link>
     </div>
     <span className="flex items-center p-2 mr-4">
         <Social/>
