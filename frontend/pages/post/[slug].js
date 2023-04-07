@@ -37,6 +37,7 @@ const PortableText = require('@portabletext/react').PortableText;
     
     const { title, name = "Missing name", categories, authorImage, body = [] } = post;
     
+    // eslint-disable-next-line react-hooks/rules-of-hooks
     const [fontSize, setFontSize] = useState('medium');
     const fontSizes = ['small', 'medium', 'large'];
 

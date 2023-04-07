@@ -22,33 +22,34 @@ interface PostsProps {
 const Home = ({ posts, categories  }: PostsProps) => {
   //const { handleTheme } = useContext(PostContext);
   //console.log(postsAndCategories);
-  console.log(posts)
-
-
+  //console.log(posts)
   return (
     <>
-    <label> 
-      <p>Welcome to a blog! <span className='count'>{posts.length}</span></p>
-    </label>
 
     <section className="py-l5">
-        <div className="flex flex-column md-flex-row md-w-90pc mx-auto">
-          {/* awdwad */}
+
+      <h1 className='paragraph'> Bienvenido a mis pensamientos </h1>
+      <p className='paragraph2'> Aquí encontrarás mis pensamientos, reflexiones, y experiencias. </p>
+
+        <div className="flex flex-column md-flex-row md-w-90pc mx-auto contenedorcard">
+
           {posts.map((post) => (
             <div className="w-100pc md-w-50pc" key={post._id}>
-                <div className="br-8 p-5 m-5 bg-indigo-lightest-10 pointer hover-scale-up-1 ease-300">
-                    <div className="inline-block bg-indigo-lightest-30 indigo-lightest br-3 px-4 py-1 mb-10 fs-s4 uppercase ">
-                    {post.publishedAt}
-                    </div>
-                    <div className="indigo-lightest fw-600 fs-m1">{post.title} 
-                    <span className="opacity-30"> 
-                    <div>  {post.categories} </div>
-                    </span> 
+                <div className="card2 pointer">
+                      <div className="inline-block bg-indigo-lightest-30 indigo-lightest br-3 px-4 py-1 mb-10 fs-s4 uppercase ">
+                        {post.publishedAt}
+                      </div>
+                    <div className="indigo-lightest fw-400 fs-m1">{post.title} 
+                      <span className="opacity-30"> 
+                      <div>  {post.categories} </div>
+                      </span> 
                     <p className="opacity-50"> 
-                    <PortableText value={post.body} /> </p>
+                      <PortableText x={post.body} />
+                    </p>
                     </div>
-                    <Link href="/post/[slug]" as={`/post/${post.slug}`} className="mt-10 button bg-indigo-lightest-20 bg-white fs-s3 black no-underline">
-                    Read</Link>
+                      <Link href="/post/[slug]" as={`/post/${post.slug}`} className="mt-10 button bg-indigo-lightest-20 bg-white fs-s3 black no-underline">
+                      Read
+                      </Link>
                 </div>
             </div>
           ))}

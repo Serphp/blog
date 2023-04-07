@@ -1,0 +1,31 @@
+footer {
+    width: 100%;
+    height: 200px;
+    color: #fff;
+    text-align: center;
+    overflow-clip-margin: content-box;
+    border: 0;
+    .fondo {
+        //background-color: #08915f16;
+        padding: 1rem;
+        margin-top: 1rem;
+        
+        background-image: url('https://www.platoapp.com/assets/images/Group-225-p-1600.png');
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: cover;
+        overflow-clip-margin: content-box;
+        overflow: clip;
+        max-width: 100% !important;
+        vertical-align: middle;
+        left: 0;
+        bottom: 0;
+        border: 0;
+    }
+    .cat {
+        cursor: pointer;
+        font-size: 16px;
+        //background-color: #333;
+        border-radius: 20px 20px 0 20px;
+    }
+}

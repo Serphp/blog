@@ -33,8 +33,8 @@ export default function Footer() {
 return (
 
 <footer>
-{/* <Base/> */}
-<div className={`thinkcont ${showText ? '' : 'hidden'}`}>
+  <div className='fondo'>
+  <div className={`thinkcont ${showText ? '' : 'hidden'}`}>
   <div className={`think ${showText ? '' : 'hidden'}`}>{texto}</div>
 </div>
 
@@ -47,31 +47,29 @@ return (
     title='dont touch me!'/>
 </div>
 
-
-
   <Social/>
 
-  <style jsx>{`
-.moving {
-  animation: rotate 1s linear infinite;
-}
-@keyframes rotate {
-  from {
-    transform: rotate(0deg);
+    <style jsx>{`
+  .moving {
+    animation: rotate 1s linear infinite;
   }
-  to {
-    transform: rotate(360deg);
+  @keyframes rotate {
+    from {
+      transform: rotate(0deg);
+    }
+    to {
+      transform: rotate(360deg);
+    }
   }
-}
-.thinkcont.hidden {
-  display: none;
-}
+  .thinkcont.hidden {
+    display: none;
+  }
 
-.think.hidden {
-  visibility: hidden;
-}
-`}</style>
-
+  .think.hidden {
+    visibility: hidden;
+  }
+  `}</style>
+  </div>
   </footer>
 
   

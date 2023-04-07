@@ -1,27 +1,17 @@
 /* eslint-disable react/prop-types */
 import Link from 'next/link';
 import { getAllCategories } from './api/categorie';
-import { Key, ReactElement, JSXElementConstructor, ReactFragment, ReactPortal } from 'react';
 
+interface CategoryProps {
+    categories: { _id: string; title: string; slug: { current: string }; publishedAt: string; }[];
+}
 
-function Categories({ categories }) {
-    console.log(getAllCategories);
+const Categories = ({ categories  }: CategoryProps) => {
     return (
-        <div>
+        <>
         <label> 
         <h1>Categories</h1>
         </label>
-
-        {/* <ul>
-            {categories.map((category: { slug: { current: Key | null | undefined; }; title: string | number | boolean | ReactElement<any, string | JSXElementConstructor<any>> | ReactFragment | ReactPortal | null | undefined; }) => (
-            <li key={category.slug?.current}>
-            <Link href={`/categories/${category.slug?.current}`}>
-                {category.title}
-            </Link>
-            </li>
-            ))}
-
-        </ul> */}
 
         {
         categories.map(({ _id, title = '',slug = { current: '' }, publishedAt = '' }) => (
@@ -35,7 +25,7 @@ function Categories({ categories }) {
         )
         )}
 
-        </div>
+        </>
     );
 }
 

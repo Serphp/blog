@@ -1,5 +1,6 @@
 @import 'post.scss';
 @import 'about.scss';
+@import 'footer.scss';
 
 :root{
 
@@ -10,22 +11,34 @@
 }
 
 body {
-  width: 1200px;
+  //width: 1200px;
   margin: auto;
   padding: auto;
-  background-color:  rgba(66, 143, 118, 0.38);
+  //background-color:  rgba(66, 143, 118, 0.38);
+  background-color: #010530;
   font-family: 'Roboto', sans-serif;
   @media screen and (max-width: 1200px) {
     width: 100%;
   }
 }
 
-footer {
-  background-color: #08915f16;
-  color: #fff;
+
+.paragraph {
+  font-family: Fellix, sans-serif;
+  font-size: 3.2rem;
+  line-height: 1.5;
+  color: #b8b8b8;
+  margin: 0;
   text-align: center;
-  padding: 1rem;
-  margin-top: 1rem;
+}
+
+.paragraph2 {
+  font-family: Fellix, sans-serif;
+  font-size: 1.5rem;
+  line-height: 1.5;
+  color: #b8b8b8;
+  margin: 0 0 20px 0;
+  text-align: center;
 }
 
 Nav {
