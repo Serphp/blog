@@ -1,7 +1,7 @@
 /* eslint-disable react/prop-types */
 import groq from 'groq'
 import imageUrlBuilder from '@sanity/image-url'
-import React from 'react';
+import React, { useState } from 'react';
 import { client } from '../../lib/client';
 
 const PortableText = require('@portabletext/react').PortableText;
@@ -37,36 +37,82 @@ const PortableText = require('@portabletext/react').PortableText;
     
     const { title, name = "Missing name", categories, authorImage, body = [] } = post;
     
+    // eslint-disable-next-line react-hooks/rules-of-hooks
+    const [fontSize, setFontSize] = useState('medium');
+    const fontSizes = ['small', 'medium', 'large'];
+
+    const handleZoom = () => {
+    const currentIndex = fontSizes.indexOf(fontSize);
+    const nextIndex = currentIndex + 1 >= fontSizes.length ? 0 : currentIndex + 1;
+    setFontSize(fontSizes[nextIndex]);
+    };
+
+    const handleShare = () => {
+    if (navigator.share) {
+        navigator.share({
+        title: document.title,
+        url: window.location.href,
+        })
+        .then(() => console.log('Se compartió con éxito'))
+        .catch((error) => alert(`Error al compartir: ${error}`));
+    }
+    };
+    
+const handlePrint = () => {
+    window.print();
+    };
+
     //console.log(post);
 
     return (
-        <section className='contenedor'>
-        <div className='post'> 
-            <div className='actions_bar'> 
-            <div className='actions'>
-            <a href='/' className='icon'>Zoom</a>
-            <a href='/' className='icon'>Black</a>
+
+        
+<section className='contenedor'>
+<div className='actions_bar'> 
+            <div className='ipostcontent'>
+            <button className='ipost' onClick={handleZoom}>Zoom</button>
+            <button className='ipost'onClick={handleShare}>Share</button>
+            <button className='ipost' onClick={handlePrint}>Print</button>
+            <button className="button bg-pink">
+            <span className="input-icon">
+            <ion-icon name="heart" size="small"></ion-icon>
+            </span>
+            </button>
+            <button className="button">
+            SEARCH
+            <ion-icon name="search" size="small" class="ml-3"></ion-icon>
+            </button>
             </div>
-            </div>
-        <div className='post__header'>
-        <span className='titlepost'>{title}</span>
-        <span className='author'>By {name}</span>
         </div>
-        {categories && (
-            <div>
-            Posted in {categories.map(category => <span key={category}>{category}</span>)}
+    <section className="p-10 md-p-l0">
+        <div className="br-8 bg-indigo-lightest-10 p-10 md-p-l0 flex flex-wrap md-justify-between md-items-center">
+            <div className="w-100pc">
+                <h1 className='welcome'> {title} </h1>
+
+                <div className="card2 flex flex-wrap md-justify-between md-items-center">
+                    <div className="flex items-center">
+                        <img className="imgavatar w-40 h-40 br-50 mr-5" src={urlFor(authorImage).width(100).height(100).fit('max').auto('format')} alt={name} />
+                        <span className="black opacity-40 fs-m1 fw-600">{name}</span>
+                    </div>
+                    <div className="flex items-center mt-5 md-mt-0">
+                        <span className="black opacity-40 fs-m1 fw-600 mr-5">Categories:</span>
+                        <div className="flex flex-wrap">
+                            {categories.map((category, index) => (
+                                <span key={index} className="black opacity-40 fs-m1 fw-600 mr-5">{category}</span>
+                            ))}
+                        </div>
+                    </div>
+                </div>
+                
+                <p className="fw-600 black opacity-50">
+                <div className='content' style={{ fontSize: fontSize }}>
+                    <PortableText value={body} components={ptComponents}/>
+                </div>
+                </p>
             </div>
-        )}
-        {authorImage && (
-            <div className='cavatar'>
-            <img className='imgavatar' src={urlFor(authorImage)} title={`${name}'s picture`} />
-            </div>
-        )}
-        <PortableText
-            value={body}
-            components={ptComponents}
-        />
-        </div> 
+
+        </div>
+    </section>
         </section>
     )
     }
@@ -99,4 +145,5 @@ const PortableText = require('@portabletext/react').PortableText;
         }
     }
     }
+    
     export default Post;

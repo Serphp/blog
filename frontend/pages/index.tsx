@@ -1,59 +1,88 @@
 import Link from 'next/link';
 import groq from 'groq';
 import { client } from '../lib/client';
-import { useContext } from 'react';
-import { PostContext } from './components/Context/PostContext';
+import React from 'react';
+//import { PostContext } from './components/Context/PostContext';
+const PortableText = require('@portabletext/react').PortableText;
 
 interface Post {
+  body: string;
   _id: string;
   title: string;
+  categories: string;
   slug: { current: string };
   publishedAt: string;
 }
 
 interface PostsProps {
   posts: Post[];
+  categories: { title: string }[];
 }
 
-const Home = ({ posts }: PostsProps) => {
-  const { handleTheme } = useContext(PostContext);
-
+const Home = ({ posts, categories  }: PostsProps) => {
+  //const { handleTheme } = useContext(PostContext);
+  //console.log(postsAndCategories);
+  //console.log(posts)
   return (
     <>
-    <label> 
-      <p>Welcome to a blog! <span className='count'>{posts.length}</span></p>
-    </label>
 
-      <div className='comcard'>
-      {posts.length > 0 &&
-        posts.map(({ _id, title = '',slug = { current: '' }, publishedAt = '' }) =>
-          slug.current ? (
-            <div key={_id}> 
-              <div className='card2'>
-              <Link href="/post/[slug]" as={`/post/${slug.current}`}>
-                <span className='title' >{title}</span> 
-              </Link><br/>
-              {publishedAt && (
-                <span className='date'>{new Date(publishedAt).toDateString()}</span>
-              )} 
-              </div>
+    <section className="py-l5">
+
+      <h1 className='paragraph'> Bienvenido a mis pensamientos </h1>
+      <p className='paragraph2'> Aquí encontrarás mis pensamientos, reflexiones, y experiencias. </p>
+
+        <div className="flex flex-column md-flex-row md-w-90pc mx-auto contenedorcard">
+
+          {posts.map((post) => (
+            <div className="w-100pc md-w-50pc" key={post._id}>
+                <div className="card2 pointer">
+                      <div className="inline-block bg-indigo-lightest-30 indigo-lightest br-3 px-4 py-1 mb-10 fs-s4 uppercase ">
+                        {post.publishedAt}
+                      </div>
+                    <div className="indigo-lightest fw-400 fs-m1">{post.title} 
+                      <span className="opacity-30"> 
+                      <div>  {post.categories} </div>
+                      </span> 
+                    <p className="opacity-50"> 
+                      <PortableText x={post.body} />
+                    </p>
+                    </div>
+                      <Link href="/post/[slug]" as={`/post/${post.slug}`} className="mt-10 button bg-indigo-lightest-20 bg-white fs-s3 black no-underline">
+                      Read
+                      </Link>
+                </div>
             </div>
-          ) : null
-        )}
+          ))}
         </div>
+    </section>
         </>
   );
 };
 
+
 export async function getStaticProps() {
-  const posts: Post[] = await client.fetch(groq`
-    *[_type == "post" && publishedAt < now()] | order(publishedAt desc)
+  const postsAndCategories = await client.fetch(groq`
+    {
+      "posts": *[_type == "post" && publishedAt < now()] | order(publishedAt desc) {
+        title,
+        body,
+        "categories": categories[]->title,
+        publishedAt,
+        "slug": slug.current
+      },
+      "categories": *[_type == "category"]
+    }
   `);
+  const { posts, categories } = postsAndCategories;
+
   return {
     props: {
       posts,
+      categories,
     },
   };
 }
+
+
 
 export default Home;

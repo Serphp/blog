@@ -12,6 +12,7 @@ const texts = [
 export default function Footer() {
   const [texto, setTexto] = useState("");
   const [isMoving, setIsMoving] = useState(false); // estado que indica si el gif se está moviendo o noado que contiene el texto actual que se muestra
+  // eslint-disable-next-line no-undef
   const timeoutRef = useRef<NodeJS.Timeout | null>(null);
   //const [playing , setPlaying] = useState(false); // estado que indica si el gif se está moviendo o no
   const [showText, setShowText] = useState(false); // estado que indica si el texto se está mostrando o no
@@ -33,8 +34,8 @@ export default function Footer() {
 return (
 
 <footer>
-{/* <Base/> */}
-<div className={`thinkcont ${showText ? '' : 'hidden'}`}>
+  <div className='fondo'>
+  <div className={`thinkcont ${showText ? '' : 'hidden'}`}>
   <div className={`think ${showText ? '' : 'hidden'}`}>{texto}</div>
 </div>
 
@@ -47,31 +48,29 @@ return (
     title='dont touch me!'/>
 </div>
 
-
-
   <Social/>
 
-  <style jsx>{`
-.moving {
-  animation: rotate 1s linear infinite;
-}
-@keyframes rotate {
-  from {
-    transform: rotate(0deg);
+    <style jsx>{`
+  .moving {
+    animation: rotate 1s linear infinite;
   }
-  to {
-    transform: rotate(360deg);
+  @keyframes rotate {
+    from {
+      transform: rotate(0deg);
+    }
+    to {
+      transform: rotate(360deg);
+    }
   }
-}
-.thinkcont.hidden {
-  display: none;
-}
+  .thinkcont.hidden {
+    display: none;
+  }
 
-.think.hidden {
-  visibility: hidden;
-}
-`}</style>
-
+  .think.hidden {
+    visibility: hidden;
+  }
+  `}</style>
+  </div>
   </footer>
 
   

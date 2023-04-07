@@ -2,7 +2,7 @@ import { React, createContext, useState, useEffect } from 'react';
 
 export const PostContext = createContext();
 
-export const PostContextProvider = ({ children }) => {
+const PostContextProvider = ({ children }) => {
 const [theme, setTheme] = useState('none');
 const [isLoading, setIsLoading] = useState(true);
 const [score, setScore] = useState(0);
@@ -32,3 +32,5 @@ return (
 </PostContext.Provider>
 );
 };
+
+export default PostContextProvider;
