@@ -10,6 +10,13 @@ function About() {
             <div className="about">
                 <p>Hi, Im a web developer and this is my blog.</p>
                 <p>Its built with Next.js and Sanity.io.</p>
+                <p>It uses a custom CMS to manage the content.</p>
+                <p>It uses a custom CMS to manage the content.</p>
+                <p>It uses a custom CMS to manage the content.</p>
+                <p>It uses a custom CMS to manage the content.</p>
+                <p>It uses a custom CMS to manage the content.</p>
+                <p>It uses a custom CMS to manage the content.</p>
+                    
             </div>
         </div>
         </>
