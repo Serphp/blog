@@ -40,9 +40,9 @@ const PortableText = require('@portabletext/react').PortableText;
     const { title, name = "Missing name", categories, authorImage, publishedAt, body = [] } = post;
     const postDate = moment(publishedAt).fromNow();
 
-    const [setSelectedText] = useState(''); //selectedText, 
+    const [selectedText, setSelectedText] = useState(''); //selectedText, 
     const [isButtonVisible, setIsButtonVisible] = useState(false);
-    const [setButtonPosition] = useState({ top: 0, left: 0 }); //buttonPosition
+    const [buttonPosition, setButtonPosition] = useState({ top: 0, left: 0 }); //buttonPosition
     // eslint-disable-next-line react-hooks/rules-of-hooks
     const [fontSize, setFontSize] = useState('medium');
     const fontSizes = ['small', 'medium', 'large'];
@@ -105,7 +105,7 @@ const PortableText = require('@portabletext/react').PortableText;
     
     
 return (    
-<section className=''>
+<section className='contain'>
 
 
 <div className='actions_bar'> 
@@ -128,20 +128,20 @@ return (
                 <span className="opacity-50 fs-m1 fw-600">{name}</span>
             </div>
             <div className="flex items-center mt-5 md-mt-0">
-                <span className="opacity-40 fs-m1 fw-600 mr-5">Categories:</span>
+                <span className="opacity-40 fs-m1  mr-5">Categories:</span>
                 <div className="flex flex-wrap">
                     {categories.map((category, index) => (
-                        <span key={index} className="opacity-40 fs-m1 fw-600 mr-5">{category}</span>
+                        <span key={index} className="opacity-40 fs-m1 mr-5">{category}</span>
                     ))}
                 </div>
             </div>
         </div>
 
-        <div className="br-8 bg-indigo-lightest-10 p-10 md-p-l0 flex flex-wrap md-justify-between md-items-center">
-            <div className="w-100pc">
+        <div className="br-8 bg-indigo-lightest-10 p-5 md-p-l0 flex flex-wrap md-justify-between md-items-center">
+            <div className="">
                 <h1 className='title'> {title} </h1>
                 
-                <p className="fw-600 opacity-50 m-10">
+                <p className="fw-100 opacity-50 m-10">
                 <div className='content' onMouseUp={HTextSelect} style={{ fontSize: fontSize }}>
                     <PortableText value={body} components={ptComponents}/>
                     {isButtonVisible && (
