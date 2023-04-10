@@ -1,23 +1,25 @@
+import groq from "groq";
 import { client } from "../../lib/client"
 
 export async function getAllCategories(categorySlug) {
     const categories = await client.fetch(
-    `*[_type == "category"] | order(title asc) {
+        groq`*[_type == "category"] | order(title asc) {
     _id,
     title,
-    "slug": slug.current
+    "slug": slug.current,
+    description
     }`, { _id: `category-${categorySlug}` });
 return categories;
 }
 
-export const getTopicsByCategory = async (categorySlug) => {
-    const topics = await client.fetch(`*[_type == "topic" && references(^._id)] {
-    title,
-    "slug": slug.current,
-    description
-}`, { _id: `category-${categorySlug}` });
-return topics;
-};
+export async function getCategoryBySlug(slug) {
+    const category = await client.fetch(
+      `*[_type == "category" && slug.current == $slug][0]`,
+      { slug }
+    );
+    return category;
+  }
+
 
 export async function getCategories() {
     const categories = await client.fetch(`*[_type == "category"]{slug}`);

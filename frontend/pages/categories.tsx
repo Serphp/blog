@@ -3,10 +3,12 @@ import Link from 'next/link';
 import { getAllCategories } from './api/categorie';
 
 interface CategoryProps {
-    categories: { _id: string; title: string; slug: { current: string }; publishedAt: string; }[];
+    categories: { _id: string; title: string; description: string; slug: { current: string }; }[];
+    //category: { _id: string; title: string; description: string; slug: { current: string }; }[];
 }
 
 const Categories = ({ categories  }: CategoryProps) => {
+    console.log(categories);
     return (
         <>
         <label> 
@@ -14,12 +16,13 @@ const Categories = ({ categories  }: CategoryProps) => {
         </label>
 
         {
-        categories.map(({ _id, title = '',slug = { current: '' }, publishedAt = '' }) => (
+        categories.map(({ _id, title = '', description }) => (
         <div key={_id}> 
             <div className='card2'>
-            <Link href="/post/[slug]" as={`/categories/${slug?.current}`}>
+            
             <span className='paragraph2' >{title}</span> 
-            </Link><br/>
+            <br/>
+            <p className='white opacity-50'>{description}</p>
             </div>
         </div>
         )
@@ -31,6 +34,7 @@ const Categories = ({ categories  }: CategoryProps) => {
 
 export async function getStaticProps() {
     const categories = await getAllCategories();
+    //const category = await getCategoryBySlug();
     return { props: { categories } };
 }
 

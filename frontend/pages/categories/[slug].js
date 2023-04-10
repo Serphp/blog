@@ -1,20 +1,22 @@
 import { useRouter } from 'next/router';
+import { getFilteredPosts, getCategories, getCategoryBySlug } from '../../lib/api';
 import React from 'react';
-//import { posts } from '../api/posts'
-import { getCategories, getFilteredPosts } from '../api/categorie';
 
-export default function CategoryPage({ posts }) {
+export default function CategoryPage({ posts, category }) {
   const router = useRouter();
-  const { slug } = router.query;
+  if (router.isFallback) {
+    return <div>Loading...</div>;
+  }
+  const { title } = category;
 
   return (
     <div>
-      <h1>{slug}</h1>
+      <h1>{title}</h1>
       <ul>
         {posts.map((post) => (
-          <li key={post._id}>
+          <li key={post.slug}>
             <h2>{post.title}</h2>
-            <p>{post.body}</p>
+            <p>{post.excerpt}</p>
           </li>
         ))}
       </ul>
@@ -24,21 +26,16 @@ export default function CategoryPage({ posts }) {
 
 export async function getStaticPaths() {
   const categories = await getCategories();
-  const paths = categories
-    .filter((category) => category.slug?.current) // filtrar por slug definido
-    .map((category) => ({
-      params: { slug: category.slug.current },
-    }));
-
-  if (!paths.length) {
-    console.warn(`No se encontraron categorías con slug definido`);
-  }
-
-  return { paths, fallback: false };
+  const paths = categories.map((category) => ({
+    params: { slug: category.slug.current },
+  }));
+  return { paths, fallback: true };
 }
 
 export async function getStaticProps({ params }) {
   const { slug } = params;
   const posts = await getFilteredPosts({ category: slug });
-  return { props: { posts } };
+  const category = await getCategoryBySlug(slug);
+
+  return { props: { posts, category }, revalidate: 1 };
 }

@@ -4,7 +4,7 @@
 @import 'navbar.scss';
 
 :root{
-
+  //background-image: url('https://www.platoapp.com/assets/images/Stars-1.svg');
   a {
     text-decoration: none;
     color: #333;
@@ -15,6 +15,8 @@ body {
   //width: 1200px;
   margin: auto;
   padding: auto;
+  background-image: url('https://www.platoapp.com/assets/images/Stars2.svg');
+  background-attachment: fixed;
   //background-color:  rgba(66, 143, 118, 0.38);
   background-color: #010530;
   font-family: 'Roboto', sans-serif;

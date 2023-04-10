@@ -35,6 +35,7 @@ const Home = ({ posts, categories }: PostsProps) => {
     setSearchTerm(event.target.value);
   };
 
+  console.log(posts)
   return (
     <>
       <section className="py-l5">
