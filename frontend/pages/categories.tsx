@@ -1,6 +1,6 @@
 /* eslint-disable react/prop-types */
-import Link from 'next/link';
-import { getAllCategories } from './api/categorie';
+//import Link from 'next/link';
+import { getAllCategories } from '../pages/api/categorie';
 
 interface CategoryProps {
     categories: { _id: string; title: string; description: string; slug: { current: string }; }[];
