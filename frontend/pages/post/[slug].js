@@ -39,18 +39,33 @@ const PortableText = require('@portabletext/react').PortableText;
     //constantes
     const { title, name = "Missing name", categories, authorImage, publishedAt, body = [] } = post;
     const postDate = moment(publishedAt).fromNow();
-
-    const [selectedText, setSelectedText] = useState(''); //selectedText, 
+    const [isFullScreen, setIsFullScreen] = useState(false);
+    const [selectedText, setSelectedText] = useState('');
     const [isButtonVisible, setIsButtonVisible] = useState(false);
-    const [buttonPosition, setButtonPosition] = useState({ top: 0, left: 0 }); //buttonPosition
+    const [buttonis, setButtonis] = useState(false);
     // eslint-disable-next-line react-hooks/rules-of-hooks
-    const [fontSize, setFontSize] = useState('medium');
-    const fontSizes = ['small', 'medium', 'large'];
-    const handleZoom = () => {
-    const currentIndex = fontSizes.indexOf(fontSize);
-    const nextIndex = currentIndex + 1 >= fontSizes.length ? 0 : currentIndex + 1;
-    setFontSize(fontSizes[nextIndex]);
+
+    //fontSize
+    const [fontSize, setFontSize] = useState(12);
+
+
+    const handleButton = () => {
+        setButtonis(!buttonis);
     };
+
+    const handleZoom = (event) => {
+        const value = parseInt(event.target.value);
+        setFontSize(value);
+      };
+    //console.log(fontSize);
+    const handleFullScreen = () => {
+        if (!isFullScreen) {
+          document.documentElement.requestFullscreen();
+        } else {
+          document.exitFullscreen();
+        }
+        setIsFullScreen(!isFullScreen);
+      };
 
     //Logica de remarcado de texto
     // eslint-disable-next-line react-hooks/rules-of-hooks
@@ -74,9 +89,6 @@ const PortableText = require('@portabletext/react').PortableText;
         setSelectedText(text);
         setIsButtonVisible(true);
     
-        const range = selection.getRangeAt(0);
-        const rect = range.getBoundingClientRect();
-        setButtonPosition({ top: rect.top - 30, left: rect.left + rect.width / 2 });
         document.addEventListener("mouseup", DetectText);
       };
 
@@ -102,23 +114,16 @@ const PortableText = require('@portabletext/react').PortableText;
     };
     
     const handlePrint = () => {window.print();};
+    //console.log(selectedText);
     
-    
+    const buttonstate = buttonis ? 'visible' : 'hidden';
+    console.log(buttonis);
+
 return (    
 <section className='contain'>
 
 
 <div className='actions_bar'> 
-<div className='ipostcontent'>
-
-<button className='button ipost' onClick={handleZoom}>Zoom</button>
-<button className='ipost'onClick={handleShare}>Share</button>
-<button className='ipost' onClick={handlePrint}>Print</button>
-<button className="ipost button bg-pink"><span className="input-icon"><ion-icon name="heart" size="small"></ion-icon></span></button>
-<button className="ipost button">SEARCH<ion-icon name="search" size="small" class="ml-3"></ion-icon></button>
-
-</div>
-
 
         </div>
     <section className="p-10 md-p-10">
@@ -136,25 +141,56 @@ return (
                 </div>
             </div>
         </div>
+    
+    <div className="card3 flex items-center mt-5 justify-between">
+        
+        <div className='flex items-center'>
+            {
+                buttonis && (
+                <>
+            <button className="button bg-pink" onClick={HMarktext}><span className="input-icon"><ion-icon name="bookmark" size="small"></ion-icon></span></button>
+            <button className="button bg-pink" onClick={HTextSelect}><span className="input-icon"><ion-icon name="create" size="small"></ion-icon></span></button>
+            <button className="button bg-pink" onClick={handleFullScreen}><span className="input-icon"><ion-icon name="resize" size="small"></ion-icon></span></button>
+            <button className="button bg-pink" onClick={handleShare}><span className="input-icon"><ion-icon name="share-social" size="small"></ion-icon></span></button>
+            <button className="button" onClick={handlePrint}>PRINT<ion-icon name="print" size="small" class="ml-3"></ion-icon></button>
+                </>
+                    )
+            }
+        </div>
+        
+    <div className="flex items-center">
+    <button className="ipost button" onClick={handleButton}> {buttonstate} </button>
+
+        </div>
+        <div className="flex items-center ml-5">
+            <button className="button bg-pink"><span className="input-icon"><ion-icon name="heart" size="small"></ion-icon></span></button>
+            <button className="button">SEARCH<ion-icon name="search" size="small" class="ml-3"></ion-icon></button>
+        </div>
+    </div>
+
+      <input type="range" min="12" max="22" value={fontSize} onChange={handleZoom} />
+      <span>{fontSize}px</span>
+
 
         <div className="br-8 bg-indigo-lightest-10 p-5 md-p-l0 flex flex-wrap md-justify-between md-items-center">
             <div className="">
                 <h1 className='title'> {title} </h1>
                 
-                <p className="fw-100 opacity-50 m-10">
-                <div className='content' onMouseUp={HTextSelect} style={{ fontSize: fontSize }}>
-                    <PortableText value={body} components={ptComponents}/>
-                    {isButtonVisible && (
-                        <button className='buttonabsolute' onClick={HMarktext}>+</button>
-                        
-                    )}
+                <div className="fw-100 opacity-50 m-10" style={{ fontSize: `${fontSize}px` }}>
+                <div className='content' onMouseUp={HTextSelect} >
+                    Probando el texto
+                    
+                    <PortableText value={body} components={ptComponents} />
+                    
+
                 </div>
-                </p>
+                </div>
             </div>
         </div>
         <div className='card3 flex items-center mt-5 md-justify-end'> 
             <div className='fs-m1 fw-600 mr-5 fs-m1 fw-600 mr-5'>{postDate}</div> 
         </div>
+        {isButtonVisible && (<button className='buttonabsolute' onClick={HMarktext}>+</button>)}
     </section>
     <div className='p-10'></div>
         </section>
