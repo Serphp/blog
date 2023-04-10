@@ -3,9 +3,11 @@ import Link from 'next/link';
 import moment from 'moment';
 import groq from 'groq';
 import { client } from '../lib/client';
+import PostPreview from './components/PostPreview';
 const PortableText = require('@portabletext/react').PortableText;
 
 interface Post {
+  mainImage: { asset: { url: string; }; alt: string; };
   body: string;
   _id: string;
   title: string;
@@ -39,10 +41,18 @@ const Home = ({ posts, categories }: PostsProps) => {
   return (
     <>
       <section className="py-l5">
-        <h1 className="paragraph">Bienvenido a mis pensamientos</h1>
+        <h1 className="paragraph">Bienvenido a mi blog</h1>
         <p className="paragraph2">
-          Aquí encontrarás mis pensamientos, reflexiones, y experiencias.
+          Nunca te rindas
         </p>
+
+        <PostPreview 
+          title={posts[0].title}
+          slug={posts[0].slug.current}
+          excerpt={posts[0].body}
+          mainImage={posts[0].mainImage}
+        />
+
 
         <div className='contenedor'>
           <input
@@ -106,6 +116,7 @@ export async function getStaticProps() {
         body,
         "categories": categories[]->title,
         publishedAt,
+        mainImage.asset->url,
         "slug": slug.current
       },
       "categories": *[_type == "category"]

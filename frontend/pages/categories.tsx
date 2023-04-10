@@ -1,41 +1,48 @@
 /* eslint-disable react/prop-types */
 //import Link from 'next/link';
-import { getAllCategories } from '../pages/api/categorie';
+import { getAllCategories, getAllCategoriesSlugs, getAllPostsForCategory, getCategoryBySlug } from '../pages/api/categorie';
 
-interface CategoryProps {
-    categories: { _id: string; title: string; description: string; slug: { current: string }; }[];
-    //category: { _id: string; title: string; description: string; slug: { current: string }; }[];
+import Link from "next/link";
+import { useRouter } from "next/router";
+
+interface CategoriesProps {
+  categories: {
+    title: string;
+    slug: string;
+  }[];
 }
 
-const Categories = ({ categories  }: CategoryProps) => {
-    console.log(categories);
-    return (
-        <>
-        <label> 
-        <h1>Categories</h1>
-        </label>
+export default function Categorias({ categories }: CategoriesProps) {
+  const router = useRouter();
 
-        {
-        categories.map(({ _id, title = '', description }) => (
-        <div key={_id}> 
-            <div className='card2'>
-            
-            <span className='paragraph2' >{title}</span> 
-            <br/>
-            <p className='white opacity-50'>{description}</p>
-            </div>
-        </div>
-        )
-        )}
+  if (router.isFallback) {
+    return <div>Loading...</div>;
+  }
 
-        </>
-    );
+
+
+  return (
+    <div>
+      <h1>Categorías</h1>
+      <ul>
+        {categories.map((category) => (
+          <li key={category.slug}>
+            <Link href={`/categorias/${category.slug}`}>
+              {category.title}
+            </Link>
+          </li>
+        ))}
+      </ul>
+    </div>
+  );
 }
 
 export async function getStaticProps() {
-    const categories = await getAllCategories();
-    //const category = await getCategoryBySlug();
-    return { props: { categories } };
-}
+  const categories = await getAllCategories();
 
-export default Categories;
+  return {
+    props: {
+      categories,
+    },
+  };
+}

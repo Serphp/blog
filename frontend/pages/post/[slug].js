@@ -116,7 +116,7 @@ const PortableText = require('@portabletext/react').PortableText;
     const handlePrint = () => {window.print();};
     //console.log(selectedText);
     
-    const buttonstate = buttonis ? 'visible' : 'hidden';
+    const buttonstate = buttonis ? 'hide' : 'show';
     console.log(buttonis);
 
 return (    
@@ -148,8 +148,8 @@ return (
             {
                 buttonis && (
                 <>
-            <button className="button bg-pink" onClick={HMarktext}><span className="input-icon"><ion-icon name="bookmark" size="small"></ion-icon></span></button>
-            <button className="button bg-pink" onClick={HTextSelect}><span className="input-icon"><ion-icon name="create" size="small"></ion-icon></span></button>
+            {/* <button className="button bg-pink" onClick={HMarktext}><span className="input-icon"><ion-icon name="bookmark" size="small"></ion-icon></span></button>
+            <button className="button bg-pink" onClick={HTextSelect}><span className="input-icon"><ion-icon name="create" size="small"></ion-icon></span></button> */}
             <button className="button bg-pink" onClick={handleFullScreen}><span className="input-icon"><ion-icon name="resize" size="small"></ion-icon></span></button>
             <button className="button bg-pink" onClick={handleShare}><span className="input-icon"><ion-icon name="share-social" size="small"></ion-icon></span></button>
             <button className="button" onClick={handlePrint}>PRINT<ion-icon name="print" size="small" class="ml-3"></ion-icon></button>
@@ -158,8 +158,9 @@ return (
             }
         </div>
         
-    <div className="flex items-center">
-    <button className="ipost button" onClick={handleButton}> {buttonstate} </button>
+    <div className="ipostcontent">
+            
+    <button className="ipost" onClick={handleButton}> {buttonstate} </button>
 
         </div>
         <div className="flex items-center ml-5">
@@ -168,8 +169,8 @@ return (
         </div>
     </div>
 
-      <input type="range" min="12" max="22" value={fontSize} onChange={handleZoom} />
-      <span>{fontSize}px</span>
+      {/* <input type="range" min="12" max="22" value={fontSize} onChange={handleZoom} />
+      <span>{fontSize}px</span> */}
 
 
         <div className="br-8 bg-indigo-lightest-10 p-5 md-p-l0 flex flex-wrap md-justify-between md-items-center">
@@ -228,4 +229,13 @@ return (
     }
     }
     
+    export async function getAllPostsForCategory(categoryId) {
+        const query = `
+          *[_type == "post" && references($categoryId) && publishedAt < now()] | order(publishedAt desc)
+        `;
+        const params = { categoryId };
+        const posts = await client().fetch(query, params);
+        return posts;
+      }
+
     export default Post;
