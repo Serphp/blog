@@ -78,6 +78,44 @@ li {
     border-radius: 5px;
 }
 
+.protect {
+    font-size: 22px;
+    color: #000000;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 800;
+}
+
+.postbutton {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    margin: 10px;
+    padding: 10px;
+    border-radius: 5px;
+    background-color: #ffffff4a;
+    transition: all 0.3s ease-in-out;
+    &:hover {
+        background-color: #ffffff86;
+        //color: #ffffff;
+    }
+}
+
+.date {
+    display: flex;
+    gap: 5px;
+    font-size: 12px;
+    color: #333;
+    font-family: 'Roboto', sans-serif;
+    background-color: #a4a4a4ba;
+    padding: 10px;
+    border-radius: 5px;
+    margin: -5px 0 40px 0;
+    font-weight: 600;
+    text-transform: uppercase;
+}
+
 .card2 {
     display: flexbox;
     margin: 20px;
@@ -86,7 +124,7 @@ li {
     background-color: rgba(255, 255, 255, 0.132);
     transition: all 0.3s ease-in-out;
     &:hover {
-        //scale: 1.1;
+        scale: 1.1;
         background-color: rgba(255, 255, 255, 0.196);
     }
 }

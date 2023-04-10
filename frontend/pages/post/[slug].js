@@ -122,10 +122,6 @@ const PortableText = require('@portabletext/react').PortableText;
 return (    
 <section className='contain'>
 
-
-<div className='actions_bar'> 
-
-        </div>
     <section className="p-10 md-p-10">
             <div className="card3 flex flex-wrap md-justify-between md-items-center">
             <div className="flex items-center">
@@ -143,30 +139,28 @@ return (
         </div>
     
     <div className="card3 flex items-center mt-5 justify-between">
-        
-        <div className='flex items-center'>
+        <div className=''>
             {
                 buttonis && (
-                <>
-            {/* <button className="button bg-pink" onClick={HMarktext}><span className="input-icon"><ion-icon name="bookmark" size="small"></ion-icon></span></button>
-            <button className="button bg-pink" onClick={HTextSelect}><span className="input-icon"><ion-icon name="create" size="small"></ion-icon></span></button> */}
-            <button className="button bg-pink" onClick={handleFullScreen}><span className="input-icon"><ion-icon name="resize" size="small"></ion-icon></span></button>
-            <button className="button bg-pink" onClick={handleShare}><span className="input-icon"><ion-icon name="share-social" size="small"></ion-icon></span></button>
-            <button className="button" onClick={handlePrint}>PRINT<ion-icon name="print" size="small" class="ml-3"></ion-icon></button>
-                </>
-                    )
+                    <>
+                    {/* <button className="button bg-pink" onClick={HMarktext}><span className="input-icon"><ion-icon name="bookmark" size="small"></ion-icon></span></button>
+                    <button className="button bg-pink" onClick={HTextSelect}><span className="input-icon"><ion-icon name="create" size="small"></ion-icon></span></button> */}
+                    <button className="button bg-pink" onClick={handleFullScreen}><span className="input-icon"><ion-icon name="resize" size="small"></ion-icon></span></button>
+                    <button className="button bg-pink" onClick={handleShare}><span className="input-icon"><ion-icon name="share-social" size="small"></ion-icon></span></button>
+                    <button className="button" onClick={handlePrint}>PRINT<ion-icon name="print" size="small" class="ml-3"></ion-icon></button>
+                    </>
+                )
             }
         </div>
         
     <div className="ipostcontent">
-            
     <button className="ipost" onClick={handleButton}> {buttonstate} </button>
-
         </div>
         <div className="flex items-center ml-5">
             <button className="button bg-pink"><span className="input-icon"><ion-icon name="heart" size="small"></ion-icon></span></button>
             <button className="button">SEARCH<ion-icon name="search" size="small" class="ml-3"></ion-icon></button>
         </div>
+        
     </div>
 
       {/* <input type="range" min="12" max="22" value={fontSize} onChange={handleZoom} />
@@ -177,13 +171,11 @@ return (
             <div className="">
                 <h1 className='title'> {title} </h1>
                 
-                <div className="fw-100 opacity-50 m-10" style={{ fontSize: `${fontSize}px` }}>
+                <div className="fw-100 opacity-80 m-3" style={{ fontSize: `${fontSize}px` }}>
                 <div className='content' onMouseUp={HTextSelect} >
-                    Probando el texto
-                    
-                    <PortableText value={body} components={ptComponents} />
-                    
 
+                    <PortableText value={body} components={ptComponents} />
+ 
                 </div>
                 </div>
             </div>

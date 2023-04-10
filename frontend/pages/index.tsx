@@ -3,7 +3,7 @@ import Link from 'next/link';
 import moment from 'moment';
 import groq from 'groq';
 import { client } from '../lib/client';
-import PostPreview from './components/PostPreview';
+//import PostPreview from './components/PostPreview';
 const PortableText = require('@portabletext/react').PortableText;
 
 interface Post {
@@ -14,6 +14,7 @@ interface Post {
   categories: string;
   slug: { current: string };
   publishedAt: string;
+  _updatedAt: string;
 }
 
 interface PostsProps {
@@ -37,7 +38,8 @@ const Home = ({ posts, categories }: PostsProps) => {
     setSearchTerm(event.target.value);
   };
 
-  console.log(posts)
+  console.log(posts);
+  //console.log(categories);
   return (
     <>
       <section className="py-l5">
@@ -46,12 +48,12 @@ const Home = ({ posts, categories }: PostsProps) => {
           Nunca te rindas
         </p>
 
-        <PostPreview 
+        {/* <PostPreview 
           title={posts[0].title}
           slug={posts[0].slug.current}
           excerpt={posts[0].body}
           mainImage={posts[0].mainImage}
-        />
+        /> */}
 
 
         <div className='contenedor'>
@@ -66,14 +68,29 @@ const Home = ({ posts, categories }: PostsProps) => {
 
 
         <div className="flex flex-column md-flex-row md-w-90pc mx-auto contenedorcard">
-          {filteredPosts.length > 0 ? (
+          {filteredPosts.length > 0 ? ( 
             filteredPosts.map((post) => (
+              
               <div className="w-100pc md-w-50pc" key={post._id}>
-                <div className="card2 pointer">
-                  <div className="inline-block bg-indigo-lightest-30 indigo-lightest br-3 px-4 py-1 mb-10 fs-s4 uppercase ">
-                    {moment(post.publishedAt).fromNow()}
+                <div className="card2" 
+                      style={{
+                        backgroundImage: `url(${post.mainImage})`,
+                        zIndex: "-999",
+                        backgroundRepeat: "no-repeat",
+                        backgroundSize: "cover",
+                        //backdropFilter: "blur(10px)",
+                        opacity: "0.5",
+                      }}>
+                  <div className="flex justify-between">
+                  <p className="date">
+                  <ion-icon name="time-outline" size="small"></ion-icon>
+                      {moment(post.publishedAt).fromNow()}</p>
+                  <p className="date">
+                  <ion-icon name="time-outline" size="small"></ion-icon>
+                      {moment(post._updatedAt,).fromNow()}</p>
                   </div>
-                  <div className="indigo-lightest fw-400 fs-m1">
+
+                  <div className="protect">
                     {post.title}
                     <span className="opacity-30">
                       <div> {post.categories} </div>
@@ -90,8 +107,8 @@ const Home = ({ posts, categories }: PostsProps) => {
                   <Link
                     href="/post/[slug]"
                     as={`/post/${post.slug}`}
-                    className="mt-10 button bg-indigo-lightest-20 bg-white fs-s3 black no-underline"
-                  >
+                    className="postbutton">
+                      <ion-icon className="icon" name="arrow-forward-outline" size="small"></ion-icon>
                     Read
                   </Link>
                 </div>
@@ -116,7 +133,8 @@ export async function getStaticProps() {
         body,
         "categories": categories[]->title,
         publishedAt,
-        mainImage.asset->url,
+        "mainImage": mainImage.asset->url,
+        _updatedAt,
         "slug": slug.current
       },
       "categories": *[_type == "category"]
