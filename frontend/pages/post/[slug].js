@@ -87,7 +87,7 @@ const PortableText = require('@portabletext/react').PortableText;
         const selection = window.getSelection();
         const text = selection.toString();
         setSelectedText(text);
-        selectedText(text);
+        
         setIsButtonVisible(true);
     
         document.addEventListener("mouseup", DetectText);
@@ -95,22 +95,31 @@ const PortableText = require('@portabletext/react').PortableText;
 
     const HMarktext = () => {
         const selection = window.getSelection();
-        const range = selection.getRangeAt(0);
-        const newNode = document.createElement('span');
-        newNode.style.backgroundColor = 'yellow';
-        range.surroundContents(newNode);
+        if (!selection?.toString()) return; // No se ha seleccionado nada
+        const ranges = [];
+        for (let i = 0; i < selection.rangeCount; i++) {
+          const range = selection.getRangeAt(i);
+          if (range.toString().length < 5) continue; // Selección demasiado corta
+          ranges.push(range);
+        }
+        if (!ranges.length) return; // No se encontró ninguna selección válida
+        ranges.forEach(range => {
+          const newNode = document.createElement('span');
+          newNode.style.backgroundColor = 'yellow';
+          range.surroundContents(newNode);
+        });
         setIsButtonVisible(false);
-    };
+      };
       //End Logica de remarcado de texto
 
     const handleShare = () => {
     if (navigator.share) {
-        navigator.share({
-        title: document.title,
-        url: window.location.href,
+            navigator.share({
+            title: document.title,
+            url: window.location.href,
         })
-        .then(() => console.log('Se compartió con éxito'))
-        .catch((error) => alert(`Error al compartir: ${error}`));
+            .then(() => console.log('Se compartió con éxito'))
+            .catch((error) => alert(`Error al compartir: ${error}`));
         }
     };
     
@@ -118,12 +127,12 @@ const PortableText = require('@portabletext/react').PortableText;
     //console.log(selectedText);
     
     const buttonstate = buttonis ? 'hide' : 'show';
-    console.log(buttonis);
+    console.log(selectedText);
 
 return (    
 <section className='contain'>
 
-    <section className="p-10 md-p-10">
+    <section className="p-10 md-p-10 contenedor">
             <div className="card3 flex flex-wrap md-justify-between md-items-center">
             <div className="flex items-center">
                 <img className="imgavatar w-40 h-40 br-50 mr-5" src={urlFor(authorImage).width(100).height(100).fit('max').auto('format')} alt={name} />
@@ -139,37 +148,32 @@ return (
             </div>
         </div>
     
-    <div className="card3 flex items-center mt-5 justify-between">
-        <div className=''>
-            {
-                buttonis && (
-                    <>
-                    {/* <button className="button bg-pink" onClick={HMarktext}><span className="input-icon"><ion-icon name="bookmark" size="small"></ion-icon></span></button>
-                    <button className="button bg-pink" onClick={HTextSelect}><span className="input-icon"><ion-icon name="create" size="small"></ion-icon></span></button> */}
-                    <button className="button bg-pink" onClick={handleFullScreen}><span className="input-icon"><ion-icon name="resize" size="small"></ion-icon></span></button>
-                    <button className="button bg-pink" onClick={handleShare}><span className="input-icon"><ion-icon name="share-social" size="small"></ion-icon></span></button>
-                    <button className="button" onClick={handlePrint}>PRINT<ion-icon name="print" size="small" class="ml-3"></ion-icon></button>
-                    </>
-                )
-            }
-        </div>
-        
-    <div className="ipostcontent">
-    <button className="ipost" onClick={handleButton}> {buttonstate} </button>
-        </div>
+    <div className="card3 flex items-center justify-end">
         <div className="flex items-center ml-5">
+        <button className="button ipost" onClick={handleButton}> {buttonstate} </button>
             <button className="button bg-pink"><span className="input-icon"><ion-icon name="heart" size="small"></ion-icon></span></button>
             <button className="button">SEARCH<ion-icon name="search" size="small" class="ml-3"></ion-icon></button>
         </div>
-        
     </div>
+
+    {
+    buttonis && (
+        <>
+        <div className='card3'>
+        {/* <button className="button bg-pink" onClick={HMarktext}><span className="input-icon"><ion-icon name="bookmark" size="small"></ion-icon></span></button>
+        <button className="button bg-pink" onClick={HTextSelect}><span className="input-icon"><ion-icon name="create" size="small"></ion-icon></span></button> */}
+        <button className="button bg-pink" onClick={handleFullScreen}><span className="input-icon"><ion-icon name="resize" size="small"></ion-icon></span></button>
+        <button className="button bg-pink" onClick={handleShare}><span className="input-icon"><ion-icon name="share-social" size="small"></ion-icon></span></button>
+        <button className="button" onClick={handlePrint}>PRINT<ion-icon name="print" size="small" class="ml-3"></ion-icon></button>
+        </div>
+        </>
+    )
+    }
 
       {/* <input type="range" min="12" max="22" value={fontSize} onChange={handleZoom} />
       <span>{fontSize}px</span> */}
 
-
-        <div className="br-8 bg-indigo-lightest-10 p-5 md-p-l0 flex flex-wrap md-justify-between md-items-center">
-            <div className="">
+        <div className="card3">
                 <h1 className='title'> {title} </h1>
                 
                 <div className="fw-100 opacity-80 m-3">
@@ -177,7 +181,6 @@ return (
 
                     <PortableText value={body} components={ptComponents} />
  
-                </div>
                 </div>
             </div>
         </div>
