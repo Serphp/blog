@@ -46,17 +46,17 @@ const PortableText = require('@portabletext/react').PortableText;
     // eslint-disable-next-line react-hooks/rules-of-hooks
 
     //fontSize
-    const [fontSize, setFontSize] = useState(12);
+    //const [fontSize, setFontSize] = useState(12);
 
 
     const handleButton = () => {
         setButtonis(!buttonis);
     };
 
-    const handleZoom = (event) => {
-        const value = parseInt(event.target.value);
-        setFontSize(value);
-      };
+    // const handleZoom = (event) => {
+    //     const value = parseInt(event.target.value);
+    //     setFontSize(value);
+    //   };
     //console.log(fontSize);
     const handleFullScreen = () => {
         if (!isFullScreen) {
@@ -87,6 +87,7 @@ const PortableText = require('@portabletext/react').PortableText;
         const selection = window.getSelection();
         const text = selection.toString();
         setSelectedText(text);
+        selectedText(text);
         setIsButtonVisible(true);
     
         document.addEventListener("mouseup", DetectText);
@@ -171,7 +172,7 @@ return (
             <div className="">
                 <h1 className='title'> {title} </h1>
                 
-                <div className="fw-100 opacity-80 m-3" style={{ fontSize: `${fontSize}px` }}>
+                <div className="fw-100 opacity-80 m-3">
                 <div className='content' onMouseUp={HTextSelect} >
 
                     <PortableText value={body} components={ptComponents} />

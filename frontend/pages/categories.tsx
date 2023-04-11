@@ -1,6 +1,6 @@
 /* eslint-disable react/prop-types */
 //import Link from 'next/link';
-import { getAllCategories, getAllCategoriesSlugs, getAllPostsForCategory, getCategoryBySlug } from '../pages/api/categorie';
+import { getAllCategories } from '../pages/api/categorie';
 
 import Link from "next/link";
 import { useRouter } from "next/router";

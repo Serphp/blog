@@ -6,6 +6,7 @@ import { client } from '../lib/client';
 //import PostPreview from './components/PostPreview';
 const PortableText = require('@portabletext/react').PortableText;
 
+
 interface Post {
   mainImage: { asset: { url: string; }; alt: string; };
   body: string;
@@ -83,10 +84,11 @@ const Home = ({ posts, categories }: PostsProps) => {
                       }}>
                   <div className="flex justify-between">
                   <p className="date">
-                  <ion-icon name="time-outline" size="small"></ion-icon>
+                  
+                  
                       {moment(post.publishedAt).fromNow()}</p>
                   <p className="date">
-                  <ion-icon name="time-outline" size="small"></ion-icon>
+                  
                       {moment(post._updatedAt,).fromNow()}</p>
                   </div>
 
@@ -108,7 +110,7 @@ const Home = ({ posts, categories }: PostsProps) => {
                     href="/post/[slug]"
                     as={`/post/${post.slug}`}
                     className="postbutton">
-                      <ion-icon className="icon" name="arrow-forward-outline" size="small"></ion-icon>
+                      
                     Read
                   </Link>
                 </div>
