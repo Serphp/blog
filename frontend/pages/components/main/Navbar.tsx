@@ -15,7 +15,7 @@ return (
     <div className="flex justify-between">
         <span className="flex items-center p-10 mr-5">
             <img className="max-h-l3 w-auto hover-scale-up-3 ease-300" src="https://i.imgur.com/pimVkwe.png"/>
-            Serphp
+            <span className="logo">Serphp</span> 
             </span>
         <a data-toggle="toggle-nav" data-target="#nav-items" href="#"
             className="flex items-center ml-auto md-hidden opacity-70">
