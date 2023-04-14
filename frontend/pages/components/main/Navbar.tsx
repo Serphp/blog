@@ -29,14 +29,13 @@ return (
     <div id="nav-items" className="hidden flex sm-w-100pc flex-column md-flex md-flex-row md-justify-start items-center">
         <Link href="/" className="nav-text fs-s1 mx-3 py-3 white no-underline">Home</Link>
         <Link href="/about" className="nav-text fs-s1 mx-3 py-3 white no-underline">About</Link>
-        <button className='button nav-text fs-s1 mx-3 py-3 white no-underline' onClick={handleTheme}>
-        Color 
-        </button>
+
         {/* <Link href="/categories" className="nav-text fs-s1 mx-3 py-3 white no-underline">Categories</Link> */}
         
     </div>
     <span className="flex items-center p-2 mr-4">
         <div className="social">
+            <button onClick={handleTheme} className="theme">Change Theme</button>
             <Social />
         </div>
     </span>

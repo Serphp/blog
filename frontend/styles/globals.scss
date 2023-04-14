@@ -71,6 +71,24 @@ body {
   text-align: center;
 }
 
+.theme {
+  font-family: Fellix, sans-serif;
+  width: 100%;
+  font-size: 1rem;
+  color: #cbcbcb;
+  text-align: center;
+  background-color: #01053048;
+  padding: 5px;
+  border: none;
+  border-radius: 10px;
+  border-top: #ffffff90 2px solid;
+  transition: all 0.3s ease-in-out;
+  &:hover {
+    size: 1.1;
+    color: #ffcdcd;
+  }
+}
+
 .title {
   font-family: Fellix, sans-serif;
   font-size: 2.5rem;

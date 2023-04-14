@@ -5,6 +5,7 @@ import imageUrlBuilder from '@sanity/image-url'
 import React, { useState } from 'react';
 import { client } from '../../lib/client';
 import moment from 'moment';
+import { favorites } from '../components/Context/PostContext';
 
 const PortableText = require('@portabletext/react').PortableText;
 //const toolkit = require('@portabletext/toolkit');
@@ -43,6 +44,7 @@ const PortableText = require('@portabletext/react').PortableText;
     const [selectedText, setSelectedText] = useState('');
     const [isButtonVisible, setIsButtonVisible] = useState(false);
     const [buttonis, setButtonis] = useState(false);
+    const [favorites, setFavorites] = useState([]);
     // eslint-disable-next-line react-hooks/rules-of-hooks
 
     //fontSize
@@ -93,6 +95,8 @@ const PortableText = require('@portabletext/react').PortableText;
         document.addEventListener("mouseup", DetectText);
       };
 
+      console.log(favorites)
+
     const HMarktext = () => {
         const selection = window.getSelection();
         if (!selection?.toString()) return; // No se ha seleccionado nada
@@ -123,7 +127,16 @@ const PortableText = require('@portabletext/react').PortableText;
         }
     };
     
-    const handlePrint = () => {window.print();};
+    const handlePrint = () => {
+        const content = document.querySelector('.print-content');
+        window.print(content);
+      };
+
+      const handleFavorite = () => {
+        setFavorites([...favorites, post]);
+        localStorage.setItem('favorites', JSON.stringify(favorites));
+        };
+      
     //console.log(selectedText);
     
     const buttonstate = buttonis ? 'hide' : 'show';
@@ -150,9 +163,9 @@ return (
     
     <div className="card3 flex items-center justify-end">
         <div className="flex items-center ml-5">
-        <button className="button ipost" onClick={handleButton}> {buttonstate} </button>
-            <button className="button bg-pink"><span className="input-icon"><ion-icon name="heart" size="small"></ion-icon></span></button>
-            <button className="button">SEARCH<ion-icon name="search" size="small" class="ml-3"></ion-icon></button>
+            <button className="button ipost" onClick={handleButton}> {buttonstate} </button>
+            <button className="button bg-pink" onClick={handleFavorite}><span className="input-icon"><ion-icon name="heart" size="small"></ion-icon></span></button>
+            {/* <button className="button">SEARCH<ion-icon name="search" size="small" class="ml-3"></ion-icon></button> */}
         </div>
     </div>
 
@@ -177,7 +190,7 @@ return (
                 <h1 className='title'> {title} </h1>
                 
                 <div className="fw-100 opacity-80 m-3">
-                <div className='content' onMouseUp={HTextSelect} >
+                <div className='content print-content' onMouseUp={HTextSelect} >
 
                     <PortableText value={body} components={ptComponents} />
  
