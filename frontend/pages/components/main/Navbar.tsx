@@ -6,9 +6,10 @@ import Social from "./Socials";
 
 export default function Navbar() {
 
-    const {handleTheme} = useContext(PostContext);
+    const {handleTheme, theme} = useContext(PostContext);
 
-    //console.log(toggleTheme);
+    const themenow = handleTheme ? "dark" : "light";
+
 
 return (
 <nav className="flex flex-column md-flex-row px-10">
@@ -35,7 +36,17 @@ return (
     </div>
     <span className="flex items-center p-2 mr-4">
         <div className="social">
-            <button onClick={handleTheme} className="theme">Change Theme</button>
+            <button onClick={handleTheme} className="theme"> {theme === 'light' ? 
+            <>
+            <div className="light">
+                Hola
+            </div>
+            </> : 
+            <>
+            <div className="dark">
+                Dark
+            </div>
+            </>} </button>
             <Social />
         </div>
     </span>
