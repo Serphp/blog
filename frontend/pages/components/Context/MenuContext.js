@@ -4,8 +4,11 @@ export const MenuContext = createContext();
 
 // eslint-disable-next-line react/prop-types
 const MenuContextProvider = ({ children }) => {
-    const isLoading = false;
+    const [isLoading, setIsLoading] = useState(true);
 
+    useEffect(() => {
+        setIsLoading(false);
+    }, []);
 
 const value = { children };
 

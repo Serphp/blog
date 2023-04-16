@@ -155,7 +155,7 @@ const PortableText = require('@portabletext/react').PortableText;
     //console.log(favorites);
     
     const buttonstate = buttonis ? 'hide' : 'show';
-    //console.log(selectedText);
+    console.log(selectedText);
 
 return (    
 <section className='contain'>

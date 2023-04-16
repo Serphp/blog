@@ -46,9 +46,9 @@ const Home = ({ posts, categories }: PostsProps) => {
   }, []);
 
 
-  const filternonefavorites = posts.filter((post) => {
-    return favorites.some((favorite) => favorite._id === post._id);
-  });
+  // const filternonefavorites = posts.filter((post) => {
+  //   return favorites.some((favorite) => favorite._id === post._id);
+  // });
 
   const filteredPosts = posts.filter((post) => {
     return post.title.toLowerCase().includes(searchTerm.toLowerCase());
