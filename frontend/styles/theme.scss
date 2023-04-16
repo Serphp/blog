@@ -8,7 +8,7 @@
         background-color: #050509ee;
         transition: all 0.3s ease;
         font-family: 'Roboto', sans-serif;
-        opacity: 0.8;
+        opacity: 0.9;
         @media screen and (max-width: 1200px) {
           width: 100%;
         }
@@ -18,8 +18,11 @@
             
             transition: all 0.3s ease;
         }
+        .fondo {
+            background-color: #050509ee;
+            opacity: 0.8;
+        }
     }
-
 }
 //light
 [data-theme="light"] {
@@ -34,5 +37,49 @@
         @media screen and (max-width: 1200px) {
           width: 100%;
         }
+        .fondo {
+            background-color: #010530;
+        }
     }
 }
+
+.theme {
+    font-family: Fellix, sans-serif;
+    width: 100%;
+    height: 20px;
+    font-size: 1rem;
+    text-align: center;
+    border: none;
+    border-radius: 10px;
+    transition: all 0.3s ease-in-out;
+    &:hover {
+      size: 1.1;
+      color: #ffcdcd;
+    }
+    .light {
+      transition: all 0.3s ease-in-out;
+      color: #8f8f8f;
+      border-bottom: #ffffff 2px solid;
+      background-image: url('https://media.tenor.com/sv1KYfbNLwcAAAAC/anime-moon.gif');
+      background-repeat: no-repeat;
+      background-size: cover;
+      border-radius: 10px;
+      box-shadow: 0 0 1px #ffffff;
+      &:hover {
+        box-shadow: 0 0 10px #ffffff;
+      }
+    }
+    .dark {
+      transition: all 0.3s ease-in-out;
+      color: #6f6f6f;
+      border-radius: 10px;
+      border-bottom: #ffffff 3px solid;
+      box-shadow: 0 0 4px #ffffff;
+      background-image: url('https://pa1.narvii.com/7649/8a69214ae6bf58a4f839ba7b80cfd5a27ffcffc3r1-245-190_00.gif');
+      background-repeat: no-repeat;
+      background-size: 200px;
+      &:hover {
+        box-shadow: 0 0 10px #ffffff;
+      }
+    }
+  }
