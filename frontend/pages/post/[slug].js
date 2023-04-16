@@ -2,10 +2,10 @@
 /* eslint-disable react/prop-types */
 import groq from 'groq'
 import imageUrlBuilder from '@sanity/image-url'
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { client } from '../../lib/client';
 import moment from 'moment';
-import { favorites } from '../components/Context/PostContext';
+//import { getfavorites } from '../components/Context/PostContext';
 
 const PortableText = require('@portabletext/react').PortableText;
 //const toolkit = require('@portabletext/toolkit');
@@ -45,21 +45,23 @@ const PortableText = require('@portabletext/react').PortableText;
     const [isButtonVisible, setIsButtonVisible] = useState(false);
     const [buttonis, setButtonis] = useState(false);
     const [favorites, setFavorites] = useState([]);
+    const [buttonfav, setButtonfav] = useState(false);
     // eslint-disable-next-line react-hooks/rules-of-hooks
-
-    //fontSize
-    //const [fontSize, setFontSize] = useState(12);
-
 
     const handleButton = () => {
         setButtonis(!buttonis);
     };
 
-    // const handleZoom = (event) => {
-    //     const value = parseInt(event.target.value);
-    //     setFontSize(value);
-    //   };
-    //console.log(fontSize);
+    useEffect(() => {
+        const favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+        setFavorites(favorites);
+        if (favorites.some((favorite) => favorite._id === post._id)) {
+            setButtonfav(true);
+        } else {
+            setButtonfav(false);
+        }
+    }, [post._id]);
+
     const handleFullScreen = () => {
         if (!isFullScreen) {
           document.documentElement.requestFullscreen();
@@ -132,15 +134,28 @@ const PortableText = require('@portabletext/react').PortableText;
         window.print(content);
       };
 
-      const handleFavorite = () => {
-        setFavorites([...favorites, post]);
-        localStorage.setItem('favorites', JSON.stringify(favorites));
-        };
+    const handleFavorite = () => {
+        setButtonfav(!buttonfav);
+        const newFavorites = [...favorites];
+    
+        if (!favorites.some((favorite) => favorite._id === post._id)) {
+            newFavorites.push(post);
+            localStorage.setItem('favorites', JSON.stringify(newFavorites));
+        } else {
+            const index = newFavorites.findIndex((favorite) => favorite._id === post._id);
+            newFavorites.splice(index, 1);
+            localStorage.setItem('favorites', JSON.stringify(newFavorites));
+            console.log(post._id)
+        }
+        
+        setFavorites(newFavorites);
+    };
+    
       
-    //console.log(selectedText);
+    //console.log(favorites);
     
     const buttonstate = buttonis ? 'hide' : 'show';
-    console.log(selectedText);
+    //console.log(selectedText);
 
 return (    
 <section className='contain'>
@@ -164,7 +179,18 @@ return (
     <div className="card3 flex items-center justify-end">
         <div className="flex items-center ml-5">
             <button className="button ipost" onClick={handleButton}> {buttonstate} </button>
-            <button className="button bg-pink" onClick={handleFavorite}><span className="input-icon"><ion-icon name="heart" size="small"></ion-icon></span></button>
+            <button className="button bg-pink" onClick={handleFavorite}>
+
+                    {
+                        buttonfav ? (
+                            <span className="input-icon"><ion-icon name="heart" size="small"></ion-icon></span>
+                        ) : (
+                            <span className="input-icon"><ion-icon name="heart-outline" size="small"></ion-icon></span>
+                        )
+                    }
+                {/* <span className="input-icon"><ion-icon name="heart" size="small"></ion-icon></span> */}
+                
+                </button>
             {/* <button className="button">SEARCH<ion-icon name="search" size="small" class="ml-3"></ion-icon></button> */}
         </div>
     </div>
@@ -209,6 +235,7 @@ return (
     }
 
     const query = groq`*[_type == "post" && slug.current == $slug][0]{
+        _id,
         title,
         "name": author->name,
         "categories": categories[]->title,

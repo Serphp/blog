@@ -7,10 +7,10 @@ const PostContextProvider = ({ children }) => {
 const [theme, setTheme] = useState('none');
 const [isLoading, setIsLoading] = useState(true);
 
-const favorites = () => {
+
+const getfavorites = () => {
     if (typeof window !== 'undefined') {
         JSON.parse(localStorage.getItem('favorites') || '[]');
-        
       }
 }
 
@@ -47,7 +47,7 @@ const handleThemeClick = () => {
     });
   };
 
-const value = { theme, setTheme, handleTheme, favorites, handleThemeClick };
+const value = { theme, setTheme, handleTheme, getfavorites, handleThemeClick };
 
 return (
 <PostContext.Provider value={ value }>

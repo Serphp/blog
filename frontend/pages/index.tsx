@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
 import moment from 'moment';
 import groq from 'groq';
@@ -30,7 +30,26 @@ interface EventProps {
 }
 
 const Home = ({ posts, categories }: PostsProps) => {
+  const [favorites, setFavorites] = useState([]);
   const [searchTerm, setSearchTerm] = useState('');
+  const [Showcode, setShowcode] = useState(false);
+
+  const handleCode = () => {
+    setShowcode(!Showcode);
+  };
+
+  useEffect(() => {
+    const storedFavorites = localStorage.getItem('favorites');
+    if (storedFavorites) {
+      setFavorites(JSON.parse(storedFavorites));
+    }
+  }, []);
+
+
+  const filternonefavorites = posts.filter((post) => {
+    return favorites.some((favorite) => favorite._id === post._id);
+  });
+
   const filteredPosts = posts.filter((post) => {
     return post.title.toLowerCase().includes(searchTerm.toLowerCase());
   });
@@ -39,7 +58,7 @@ const Home = ({ posts, categories }: PostsProps) => {
     setSearchTerm(event.target.value);
   };
 
-  console.log(posts);
+  //console.log(posts);
   //console.log(categories);
   return (
     <>
@@ -47,6 +66,9 @@ const Home = ({ posts, categories }: PostsProps) => {
         <h1 className="paragraph">Bienvenido a mi blog</h1>
         <p className="paragraph2">
           Nunca te rindas
+          <button className='showfav' onClick={handleCode}>
+            {Showcode ? '-' : '+'}
+          </button>
         </p>
 
         {/* <PostPreview 
@@ -55,6 +77,27 @@ const Home = ({ posts, categories }: PostsProps) => {
           excerpt={posts[0].body}
           mainImage={posts[0].mainImage}
         /> */}
+
+        {
+          Showcode ? (
+            <>
+              {
+                favorites.length > 0 ? (
+                  <div className='flex justify-center items-center'>
+                    <p className='card3'>Tienes {favorites.length} favoritos</p>
+                    
+                  </div>
+                ) : (
+                  <div className='flex justify-center items-center'>
+                    <p className='card3'>No tienes favoritos</p>
+                  </div>
+                )
+              }
+            </>
+          ) : (
+            <></>
+          )
+        }
 
 
         <div className='contenedor'>

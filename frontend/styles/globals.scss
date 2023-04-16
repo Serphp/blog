@@ -85,6 +85,29 @@ body {
   text-align: center;
 }
 
+.showfav {
+  background-color: #b8b8b800;
+  margin-left: 20px;
+  padding: 10px;
+  color: #ffffff;
+  width: 50px;
+  border: #00b1d5 1px solid; 
+  border-radius: 50%;
+  font-family: Fellix, sans-serif;
+  font-size: 1.5rem;
+  transition: all 0.5s ease;
+  &:hover {
+    background-color: #00b1d56a;
+    border-bottom: #ffffff 1px solid;
+    color: #ffffff;
+  }
+  &:focus > .showfav {
+    transition: all 0.5s ease;
+    outline: none;
+    content: ">";
+  }
+}
+
 .title {
   font-family: Fellix, sans-serif;
   font-size: 2.5rem;
