@@ -6,9 +6,7 @@ import Social from "./Socials";
 
 export default function Navbar() {
 
-    const {handleTheme} = useContext(PostContext);
-
-    //console.log(toggleTheme);
+    const {handleTheme, theme} = useContext(PostContext);
 
 return (
 <nav className="flex flex-column md-flex-row px-10">
@@ -35,7 +33,25 @@ return (
     </div>
     <span className="flex items-center p-2 mr-4">
         <div className="social">
-            <button onClick={handleTheme} className="theme">Change Theme</button>
+            <button onClick={handleTheme} className="theme"> {theme === 'light' ? 
+            <>
+            <div className="light">
+
+
+                <svg width="36" height="36" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path d="M12 3h.393a7.5 7.5 0 0 0 7.92 12.446A9 9 0 1 1 12 2.992V3Z"></path>
+                </svg>
+            </div>
+            </> : 
+            <>
+            <div className="dark">
+
+            <svg width="36" height="36" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path d="M12 16a4 4 0 1 0 0-8 4 4 0 0 0 0 8Z"></path>
+                <path d="m6.3 17.7-.7.7M3 12h1-1Zm9-9v1-1Zm8 9h1-1Zm-8 8v1-1ZM5.6 5.6l.7.7-.7-.7Zm12.8 0-.7.7.7-.7Zm-.7 12.1.7.7-.7-.7Z"></path>
+                </svg>
+            </div>
+            </>} </button>
             <Social />
         </div>
     </span>

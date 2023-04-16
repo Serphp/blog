@@ -17,6 +17,16 @@ const favorites = () => {
 //const postExists = favorites.some((favorite: Post) => favorite._id === post._id);
 
 useEffect(() => {
+    if (theme){
+        document.documentElement.setAttribute("data-theme", theme);
+        localStorage.setItem("theme", "dark");
+    } else {
+        document.documentElement.setAttribute("data-theme", theme);
+        localStorage.setItem("theme", "light");
+    }
+}, [theme]);
+
+useEffect(() => {
     const localTheme = window.localStorage.getItem('theme');
     localTheme && setTheme(localTheme);
     setIsLoading(false);
@@ -26,17 +36,21 @@ const handleTheme = () => {
     setTheme((prevTheme) => {
     const newTheme = prevTheme === 'light' ? 'dark' : 'light';
     window.localStorage.setItem('theme', newTheme);
-    //console.log(theme)
+    console.log(theme)
     return newTheme;
 });
 };
 
-const toggleTheme = () => {
-    setTheme((prevTheme) => (prevTheme === 'light' ? 'dark' : 'light'));
-};
+const handleThemeClick = () => {
+    setTheme((prevTheme) => {
+      return prevTheme === 'light' ? 'dark' : 'light';
+    });
+  };
+
+const value = { theme, setTheme, handleTheme, favorites, handleThemeClick };
 
 return (
-<PostContext.Provider value={{ theme, setTheme, handleTheme, toggleTheme, favorites }}>
+<PostContext.Provider value={ value }>
     {isLoading ? <div>Loading...</div> : children}
 </PostContext.Provider>
 );
