@@ -188,10 +188,7 @@ return (
                             <span className="input-icon"><ion-icon name="heart-outline" size="small"></ion-icon></span>
                         )
                     }
-                {/* <span className="input-icon"><ion-icon name="heart" size="small"></ion-icon></span> */}
-                
                 </button>
-            {/* <button className="button">SEARCH<ion-icon name="search" size="small" class="ml-3"></ion-icon></button> */}
         </div>
     </div>
 

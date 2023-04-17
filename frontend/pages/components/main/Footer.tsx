@@ -33,25 +33,28 @@ export default function Footer() {
 
 return (
 
-<footer>
+<footer >
   <div className='fondo'>
-  <div className={`thinkcont ${showText ? '' : 'hidden'}`}>
-  <div className={`think ${showText ? '' : 'hidden'}`}>{texto}</div>
-</div>
+    <div className={`thinkcont ${showText ? '' : 'hidden'}`}>
+      <div className={`think ${showText ? '' : 'hidden'}`}>
+        {texto}
+      </div>
+    </div>
 
-<div className='cat'>
-    <img 
-    className={isMoving ? "moving" : ""} 
-    src="https://media.tenor.com/8HaTOA3o0OoAAAAi/pixel-cat.gif" 
-    width="100"
-    onClick={handleCat} 
-    title='dont touch me!'/>
-</div>
+  <div className='cat'>
+      <img 
+      className={isMoving ? "moving" : ""} 
+      src="https://media.tenor.com/8HaTOA3o0OoAAAAi/pixel-cat.gif" 
+      width="100"
+      onClick={handleCat} 
+      title='dont touch me!'/>
+  </div>
 
   <div className='bar'></div>
 
 
   <Social/>
+  <p className='copy'>© 2021 PuppyCat</p>
   
 
     <style jsx>{`

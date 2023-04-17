@@ -4,56 +4,46 @@ export const PostContext = createContext();
 
 // eslint-disable-next-line react/prop-types
 const PostContextProvider = ({ children }) => {
-const [theme, setTheme] = useState('none');
-const [isLoading, setIsLoading] = useState(true);
-
+    const [theme, setTheme] = useState(
+        typeof window !== 'undefined'
+          ? localStorage.getItem('theme') || 'light'
+          : 'light'
+      );
+  const [isLoading, setIsLoading] = useState(true);
 
 const getfavorites = () => {
     if (typeof window !== 'undefined') {
         JSON.parse(localStorage.getItem('favorites') || '[]');
-      }
-}
-
-//const postExists = favorites.some((favorite: Post) => favorite._id === post._id);
+    }
+};
 
 useEffect(() => {
-    if (theme){
-        document.documentElement.setAttribute("data-theme", theme);
-        localStorage.setItem("theme", "dark");
-    } else {
-        document.documentElement.setAttribute("data-theme", theme);
-        localStorage.setItem("theme", "light");
-    }
+    document.documentElement.setAttribute('data-theme', theme);
+    localStorage.setItem('theme', theme);
 }, [theme]);
 
 useEffect(() => {
     const localTheme = window.localStorage.getItem('theme');
-    localTheme && setTheme(localTheme);
+    setTheme(localTheme || 'light');
     setIsLoading(false);
 }, []);
 
-const handleTheme = () => {
+  const handleTheme = () => {
     setTheme((prevTheme) => {
-    const newTheme = prevTheme === 'light' ? 'dark' : 'light';
-    window.localStorage.setItem('theme', newTheme);
-    console.log(theme)
-    return newTheme;
-});
-};
-
-const handleThemeClick = () => {
-    setTheme((prevTheme) => {
-      return prevTheme === 'light' ? 'dark' : 'light';
+      const newTheme = prevTheme === 'light' ? 'dark' : 'light';
+      document.documentElement.setAttribute('data-theme', newTheme);
+      localStorage.setItem('theme', newTheme);
+      return newTheme;
     });
   };
 
-const value = { theme, setTheme, handleTheme, getfavorites, handleThemeClick };
+  const value = { theme, setTheme, handleTheme, getfavorites };
 
-return (
-<PostContext.Provider value={ value }>
-    {isLoading ? <div>Loading...</div> : children}
-</PostContext.Provider>
-);
+  return (
+    <PostContext.Provider value={value}>
+      {isLoading ? <div>Loading...</div> : children}
+    </PostContext.Provider>
+  );
 };
 
 export default PostContextProvider;

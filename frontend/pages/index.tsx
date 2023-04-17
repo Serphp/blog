@@ -18,6 +18,7 @@ interface Post {
   _updatedAt: string;
 }
 
+
 interface PostsProps {
   posts: Post[];
   categories: { title: string }[];
@@ -32,10 +33,20 @@ interface EventProps {
 const Home = ({ posts, categories }: PostsProps) => {
   const [favorites, setFavorites] = useState([]);
   const [searchTerm, setSearchTerm] = useState('');
+  const [SearchShow, setSearchShow] = useState(false);
   const [Showcode, setShowcode] = useState(false);
+  const [isWide, setIsWide] = useState(false);
+
+  const handleWide = () => {
+    setIsWide(!isWide);
+  };
 
   const handleCode = () => {
     setShowcode(!Showcode);
+  };
+
+  const handleShowSearch = () => {
+    setSearchShow(!SearchShow);
   };
 
   useEffect(() => {
@@ -69,6 +80,12 @@ const Home = ({ posts, categories }: PostsProps) => {
           <button className='showfav' onClick={handleCode}>
             {Showcode ? '-' : '+'}
           </button>
+          <button className='showfav' onClick={handleShowSearch}>
+          <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <path fillRule="evenodd" d="M15.052 14.32h.813L21 19.468 19.467 21l-5.146-5.136v-.813l-.278-.288A6.66 6.66 0 0 1 9.69 16.38a6.69 6.69 0 1 1 6.69-6.69 6.66 6.66 0 0 1-1.617 4.354l.289.278ZM5.058 9.69a4.625 4.625 0 0 0 4.632 4.63 4.625 4.625 0 0 0 4.63-4.63 4.625 4.625 0 0 0-4.63-4.632A4.625 4.625 0 0 0 5.058 9.69Z" clip-rule="evenodd"></path>
+              </svg>
+          </button>
+          
         </p>
 
         {/* <PostPreview 
@@ -99,8 +116,10 @@ const Home = ({ posts, categories }: PostsProps) => {
           )
         }
 
-
-        <div className='contenedor'>
+        {
+          SearchShow && (
+            <>
+          <div className='contenedor'>
           <input
             type="text"
             className="imput"
@@ -109,13 +128,20 @@ const Home = ({ posts, categories }: PostsProps) => {
             placeholder="¿Que buscas hoy?"
           />
         </div>
+            </>
+          )
+        }
 
-
+        <button className='showide' onClick={handleWide}> 
+          {isWide ? 'Normal' : 'Wide'}
+        </button>
+        
         <div className="flex flex-column md-flex-row md-w-90pc mx-auto contenedorcard">
           {filteredPosts.length > 0 ? ( 
             filteredPosts.map((post) => (
-              
-              <div className="w-100pc md-w-50pc" key={post._id}>
+
+              <div className={isWide ? 'w-100pc md-w-50pc' : 'w-100pc md-w-30pc'} key={post._id}>
+
                 <div className="card2" 
                       style={{
                         backgroundImage: `url(${post.mainImage})`,
@@ -127,11 +153,8 @@ const Home = ({ posts, categories }: PostsProps) => {
                       }}>
                   <div className="flex justify-between">
                   <p className="date">
-                  
-                  
                       {moment(post.publishedAt).fromNow()}</p>
                   <p className="date">
-                  
                       {moment(post._updatedAt,).fromNow()}</p>
                   </div>
 
