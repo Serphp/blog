@@ -4,16 +4,28 @@ function About() {
     return (
       //class heading for img
         <>
-        <div className="section ">
-          <div className="card2"> 
-          
-            <h1 className="">Serphp
-            <p> {name} </p>
-            </h1>
-        </div>
+
+        <section className="contenedor">
+        <div className="about">
+
+          <div className="about-margin"> 
+
+            <h1>Serphp </h1>
+            <p className="about-text"> {name} </p>
+            </div>
+
+            <div className="about-content">
+              <p> 
+                
+                Hola, <br/>
+                Bienvenido a mi blog :) 
+                
+              </p>
+            </div>
+           
         <img src="/" alt="" className="image-28"></img>
       </div>
-
+      </section>
         </>
     )
 }

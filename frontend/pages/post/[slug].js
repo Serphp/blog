@@ -151,26 +151,24 @@ const PortableText = require('@portabletext/react').PortableText;
         setFavorites(newFavorites);
     };
     
-      
-    //console.log(favorites);
-    
-    const buttonstate = buttonis ? 'hide' : 'show';
-    console.log(selectedText);
+    console.log(selectedText)
 
 return (    
-<section className='contain'>
+<section className=''>
 
     <section className="p-10 md-p-10 contenedor">
             <div className="card3 flex flex-wrap md-justify-between md-items-center">
             <div className="flex items-center">
                 <img className="imgavatar w-40 h-40 br-50 mr-5" src={urlFor(authorImage).width(100).height(100).fit('max').auto('format')} alt={name} />
-                <span className="opacity-50 fs-m1 fw-600">{name}</span>
+                <span className="titlepost">{name}</span>
             </div>
             <div className="flex items-center mt-5 md-mt-0">
-                <span className="opacity-40 fs-m1  mr-5">Categories:</span>
+                <span className="icon">
+                <ion-icon name="caret-forward-outline"></ion-icon>
+                    </span>
                 <div className="flex flex-wrap">
                     {categories.map((category, index) => (
-                        <span key={index} className="opacity-40 fs-m1 mr-5">{category}</span>
+                        <span key={index} className="titlepost">{category}</span>
                     ))}
                 </div>
             </div>
@@ -178,9 +176,17 @@ return (
     
     <div className="card3 flex items-center justify-end">
         <div className="flex items-center ml-5">
-            <button className="button ipost" onClick={handleButton}> {buttonstate} </button>
+            
+        <button className={`buttonpost ${buttonis ? '' : 'active'}`} onClick={handleButton}>
+            {
+                buttonis ? (
+                <ion-icon name="caret-back-outline"></ion-icon>
+                ) : (
+                <ion-icon name="caret-back-outline"></ion-icon>
+                )
+            }
+            </button>
             <button className="button bg-pink" onClick={handleFavorite}>
-
                     {
                         buttonfav ? (
                             <span className="input-icon"><ion-icon name="heart" size="small"></ion-icon></span>
@@ -192,16 +198,18 @@ return (
         </div>
     </div>
 
-    {
-    buttonis && (
-        <>
-        <div className='card3'>
+    <div className={`card4 ${buttonis ? 'active' : ''}`}>
         {/* <button className="button bg-pink" onClick={HMarktext}><span className="input-icon"><ion-icon name="bookmark" size="small"></ion-icon></span></button>
         <button className="button bg-pink" onClick={HTextSelect}><span className="input-icon"><ion-icon name="create" size="small"></ion-icon></span></button> */}
         <button className="button bg-pink" onClick={handleFullScreen}><span className="input-icon"><ion-icon name="resize" size="small"></ion-icon></span></button>
         <button className="button bg-pink" onClick={handleShare}><span className="input-icon"><ion-icon name="share-social" size="small"></ion-icon></span></button>
         <button className="button" onClick={handlePrint}>PRINT<ion-icon name="print" size="small" class="ml-3"></ion-icon></button>
         </div>
+    {
+    buttonis && (
+        <>
+        
+
         </>
     )
     }
@@ -220,8 +228,14 @@ return (
                 </div>
             </div>
         </div>
-        <div className='card3 flex items-center mt-5 md-justify-end'> 
-            <div className='fs-m1 fw-600 mr-5 fs-m1 fw-600 mr-5'>{postDate}</div> 
+        <div className='card3 flex items-center mt-4 md-justify-end'> 
+        <span className='icon'> 
+        <ion-icon name="calendar-outline" title="Fecha" size="small"></ion-icon>
+        </span>
+
+            <div className='postdate'>
+                {postDate}
+                </div> 
         </div>
         {isButtonVisible && (<button className='buttonabsolute' onClick={HMarktext}>+</button>)}
     </section>
