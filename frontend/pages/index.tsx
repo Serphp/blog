@@ -119,28 +119,29 @@ const Home = ({ posts, categories }: PostsProps) => {
         {
           SearchShow && (
             <>
-          <div className='contenedor'>
+          <div className='flex justify-center items-center'>
+          <div className='card3'>
           <input
             type="text"
             className="imput"
             value={searchTerm}
             onChange={handleSearch}
             placeholder="¿Que buscas hoy?"
-          />
+          /></div>
         </div>
             </>
           )
         }
 
         <button className='showide' onClick={handleWide}> 
-          {isWide ? 'Normal' : 'Wide'}
+          {isWide ? 'Tiny' : 'Normal'}
         </button>
         
         <div className="flex flex-column md-flex-row md-w-90pc mx-auto contenedorcard">
           {filteredPosts.length > 0 ? ( 
             filteredPosts.map((post) => (
 
-              <div className={isWide ? 'w-100pc md-w-50pc' : 'w-100pc md-w-30pc'} key={post._id}>
+              <div className={isWide ? 'w-100pc md-w-30pc' : 'w-100pc md-w-50pc'} key={post._id}>
 
                 <div className="card2" 
                       style={{
