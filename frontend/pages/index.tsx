@@ -1,10 +1,11 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import Link from 'next/link';
 import moment from 'moment';
 import groq from 'groq';
 import { client } from '../lib/client';
-//import PostPreview from './components/PostPreview';
+import {MenuContext} from './components/Context/MenuContext';
 const PortableText = require('@portabletext/react').PortableText;
+
 
 
 interface Post {
@@ -31,15 +32,12 @@ interface EventProps {
 }
 
 const Home = ({ posts, categories }: PostsProps) => {
+  const { isWide, handleWide } = useContext(MenuContext);
   const [favorites, setFavorites] = useState([]);
   const [searchTerm, setSearchTerm] = useState('');
   const [SearchShow, setSearchShow] = useState(false);
   const [Showcode, setShowcode] = useState(false);
-  const [isWide, setIsWide] = useState(false);
 
-  const handleWide = () => {
-    setIsWide(!isWide);
-  };
 
   const handleCode = () => {
     setShowcode(!Showcode);
@@ -132,16 +130,12 @@ const Home = ({ posts, categories }: PostsProps) => {
             </>
           )
         }
-
-        <button className='showide' onClick={handleWide}> 
-          {isWide ? 'Tiny' : 'Normal'}
-        </button>
         
         <div className="flex flex-column md-flex-row md-w-90pc mx-auto contenedorcard">
           {filteredPosts.length > 0 ? ( 
             filteredPosts.map((post) => (
 
-              <div className={isWide ? 'w-100pc md-w-30pc' : 'w-100pc md-w-50pc'} key={post._id}>
+              <div className={isWide ? 'w-100pc md-w-30pc' : 'w-100pc md-w-40pc'} key={post._id}>
 
                 <div className="card2" 
                       style={{
@@ -177,10 +171,10 @@ const Home = ({ posts, categories }: PostsProps) => {
                     href="/post/[slug]"
                     as={`/post/${post.slug}`}
                     className="postbutton">
-                      
                     Read
                   </Link>
                 </div>
+
               </div>
             ))
           ) : (

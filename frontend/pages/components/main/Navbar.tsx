@@ -3,17 +3,24 @@ import Link from "next/link";
 import { useContext } from 'react';
 import { PostContext } from '../Context/PostContext';
 import Social from "./Socials";
+import { MenuContext } from "../Context/MenuContext";
+import { WideIcon } from "@/styles/Icon/wide";
+import { TinyIcon } from "@/styles/Icon/tiny"
+import { useRouter } from "next/router";
 
 export default function Navbar() {
 
+    const router = useRouter();
+    const {isWide, handleWide } = useContext(MenuContext);
     const {handleTheme, theme} = useContext(PostContext);
+    const { pathname } = router
 
 return (
 <nav className="flex flex-column md-flex-row px-10">
     <div className="flex justify-between">
         <span className="flex items-center p-10 mr-5">
             <img className="max-h-l3 w-auto hover-scale-up-3 ease-300" src="https://i.imgur.com/pimVkwe.png"/>
-            <span className="logo">Serphp</span> 
+            <span className="logo">/Serphp</span> 
             </span>
         <a data-toggle="toggle-nav" data-target="#nav-items" href="#"
             className="flex items-center ml-auto md-hidden opacity-70">
@@ -32,7 +39,16 @@ return (
         
     </div>
     <span className="flex items-center p-2 mr-4">
+        
+        {pathname === "/" && (
+        <button className='showide' onClick={handleWide}> 
+            {isWide ? <WideIcon/> : <TinyIcon/>}
+        </button>
+        )}
+
         <div className="social">
+
+
             <button onClick={handleTheme} className="theme"> {theme === 'light' ? 
             <>
             <div className="light">

@@ -1,86 +1,86 @@
 /* eslint-disable react/no-unknown-property */
 /* eslint-disable jsx-a11y/alt-text */
-import React, { useState, useRef } from 'react';
-import Social from './Socials';
+import React, { useContext, useEffect  } from 'react';
+import { PuppyContext } from '../Context/PuppyContext';
 
-const texts = [
-  'PuppyCat ',
-  'AAaAaAaA',
-  'Estamos en mantenimiento.',
-];
+// interface CatState {
+//   position: number;
+//   isMoving: boolean;
+//   showText: boolean;
+//   texto: string;
+//   Playing: boolean;
+// }
 
-export default function Footer() {
-  const [texto, setTexto] = useState("");
-  const [isMoving, setIsMoving] = useState(false); // estado que indica si el gif se está moviendo o noado que contiene el texto actual que se muestra
-  // eslint-disable-next-line no-undef
-  const timeoutRef = useRef<NodeJS.Timeout | null>(null);
-  //const [playing , setPlaying] = useState(false); // estado que indica si el gif se está moviendo o no
-  const [showText, setShowText] = useState(false); // estado que indica si el texto se está mostrando o no
+const Footer: React.FC = () => {
+  const { cat, 
+    handleMoveCat, handleStart, formatTime } = useContext(PuppyContext);
 
-  const handleCat = () => {
-    //setPlaying(!playing);
-    setTexto(!showText ? 'PuppyCat' : '');
-    setTimeout(() => {
-      setShowText(!showText);
-    }, 1000);
-    setIsMoving(true); // empezar a mover el gif
-    setTexto(texts[Math.floor(Math.random() * texts.length)]); 
-    if (timeoutRef.current) {
-      clearTimeout(timeoutRef.current);
-    }
-    timeoutRef.current = setTimeout(() => setIsMoving(false), 1000);
-  };
+  return (
+    <footer>
+      <div className='fondo'>
+        <div className={`thinkcont ${cat.showText ? '' : 'hidden'}`}>
+          <div className={`think ${cat.showText ? '' : 'hidden'}`}>
+            {cat.texto}
+          </div>
+        </div>
 
-return (
+        <div className='cat' style={{ position: 'absolute', left: `${cat.position}px` }}>
+          {/* <div style={{ display: `${cat.Playing ? 'block' : 'none'}` }}> */}
+            <div style={{ position: 'absolute', top: `${-cat.Jump}px` }}>
+          <img
+            className={cat.isMoving ? 'moving' : ''}
+            src='https://media.tenor.com/8HaTOA3o0OoAAAAi/pixel-cat.gif'
+            width='100'
+            onClick={handleStart}
+            title='dont touch me!'
+          />
+          </div>
+          {/* </div> */}
+        </div>
 
-<footer >
-  <div className='fondo'>
-    <div className={`thinkcont ${showText ? '' : 'hidden'}`}>
-      <div className={`think ${showText ? '' : 'hidden'}`}>
-        {texto}
+<section className='social'>
+<div className='puppycontainer'>
+<div className='puppyhome'>
+   Serphp
+  </div>
+
+  <p className='copy'>
+          © 2021 PuppyCat <br />
+          Serphp
+        </p>
+
+      <div className='puppy'>
+        Time: {formatTime(cat.Time)}
+        </div>
+  </div>
+  </section>
+
+
+        <style jsx>{`
+          .moving {
+            animation: rotate 1s linear ;
+          }
+
+          @keyframes rotate {
+            from {
+              transform: rotate(0deg);
+            }
+            to {
+              transform: rotate(360deg);
+            }
+          }
+
+          .thinkcont.hidden {
+            display: none;
+          }
+
+          .think.hidden {
+            visibility: hidden;
+          }
+        `}</style>
       </div>
-    </div>
+    </footer>
+  );
+};
 
-  <div className='cat'>
-      <img 
-      className={isMoving ? "moving" : ""} 
-      src="https://media.tenor.com/8HaTOA3o0OoAAAAi/pixel-cat.gif" 
-      width="100"
-      onClick={handleCat} 
-      title='dont touch me!'/>
-  </div>
-
-  <div className='bar'></div>
-
-
-  <Social/>
-  <p className='copy'>© 2021 PuppyCat</p>
-  
-
-    <style jsx>{`
-  .moving {
-    animation: rotate 1s linear infinite;
-  }
-  @keyframes rotate {
-    from {
-      transform: rotate(0deg);
-    }
-    to {
-      transform: rotate(360deg);
-    }
-  }
-  .thinkcont.hidden {
-    display: none;
-  }
-
-  .think.hidden {
-    visibility: hidden;
-  }
-  `}</style>
-  </div>
-  </footer>
-
-  
-);
-
-}
+export default Footer;

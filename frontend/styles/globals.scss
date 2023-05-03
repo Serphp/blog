@@ -15,7 +15,7 @@ body {
   //width: 1200px;
   margin: auto;
   padding: auto;
-  background-image: url('https://www.platoapp.com/assets/images/Stars2.svg');
+  //background-image: url('https://www.platoapp.com/assets/images/Stars2.svg');
   background-attachment: fixed;
   //background-color:  rgba(66, 143, 118, 0.38);
   background-color: #010530;
@@ -27,7 +27,7 @@ body {
   .darkmode {
     margin: auto;
     padding: auto;
-    background-image: url('https://www.platoapp.com/assets/images/Stars-1.svg');
+    //background-image: url('https://www.platoapp.com/assets/images/Stars-1.svg');
     background-attachment: fixed;
     //background-color:  rgba(66, 143, 118, 0.38);
     background-color: #050509ee;
@@ -107,19 +107,30 @@ body {
 
 .showide {
   background-color: #b8b8b800;
-  margin-left: 120px;
-  padding: 10px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  //width: 100%;
+  background-image: url('https://media3.giphy.com/media/NNmJyVWriRDlS/giphy.gif?cid=ecf05e47msz9qfggnyvjjiks48tni8pfqqzumn1ebusf5681&ep=v1_gifs_search&rid=giphy.gif&ct=g');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+
+  padding: 0 5px 0 5px;
   color: #ffffff;
-  width: 100px;
   border: none;
+  height: 98px;
+  margin-right: 15px;
   border-radius: 10%;
-  font-family: Fellix, sans-serif;
+  border-bottom: #b8b8b8 3px solid;
   font-size: 1rem;
   //animation: color 1s ease-in-out infinite;
   transition: all 0.1s ease-in-out;
   &:hover {
     //background-color: #00b1d56a;
-    border-bottom: #00b1d5 1px solid; 
+    // width: 50%;
+    // border-bottom: #00b1d5 1px solid; 
     color: #ffffff;
   }
   &:focus > .showfav {
