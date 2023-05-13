@@ -7,6 +7,7 @@ import { MenuContext } from "../Context/MenuContext";
 import { WideIcon } from "@/styles/Icon/wide";
 import { TinyIcon } from "@/styles/Icon/tiny"
 import { useRouter } from "next/router";
+import { BackIcon } from "@/styles/Icon/back";
 
 export default function Navbar() {
 
@@ -18,16 +19,22 @@ export default function Navbar() {
 return (
 <nav className="flex flex-column md-flex-row px-10">
     <div className="flex justify-between">
-        <span className="flex items-center p-10 mr-5">
-            <img className="max-h-l3 w-auto hover-scale-up-3 ease-300" src="https://i.imgur.com/pimVkwe.png"/>
+        <div className="flex items-center p-10 mr-5">
+
+            <Link href="/">
+            {
+                router.pathname !== '/' ? <BackIcon/> : <img className="sizelogo" src="https://i.imgur.com/pimVkwe.png"/>
+            }
+
+            </Link>
             <span className="logo">/Serphp</span> 
-            </span>
+            </div>
         <a data-toggle="toggle-nav" data-target="#nav-items" href="#"
             className="flex items-center ml-auto md-hidden opacity-70">
-            <div className="m-3 br-4 border-white p-1">
-                <div className="border-t border-white my-1 px-3"></div>
-                <div className="border-t border-white my-1"></div>
-                <div className="border-t border-white my-1"></div>
+            <div className="m-3 br-4 border-white">
+                <Link href="/about">
+                <div className="nav-text fs-s1 mx-3 py-3 white no-underline">About</div>
+                </Link>
             </div>
         </a>
     </div>
