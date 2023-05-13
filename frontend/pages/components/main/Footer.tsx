@@ -41,7 +41,7 @@ const Footer: React.FC = () => {
 <section className='social'>
 <div className='puppycontainer'>
 <div className='puppyhome'>
-   Serphp
+   
   </div>
 
   <p className='copy'>
@@ -50,7 +50,8 @@ const Footer: React.FC = () => {
         </p>
 
       <div className='puppy'>
-        Time: {formatTime(cat.Time)}
+        Lectura <br/>
+        {formatTime(cat.Time)}
         </div>
   </div>
   </section>

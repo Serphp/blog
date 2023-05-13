@@ -112,7 +112,7 @@ body {
   justify-content: center;
   align-items: center;
   //width: 100%;
-  background-image: url('https://media3.giphy.com/media/NNmJyVWriRDlS/giphy.gif?cid=ecf05e47msz9qfggnyvjjiks48tni8pfqqzumn1ebusf5681&ep=v1_gifs_search&rid=giphy.gif&ct=g');
+  //background-image: url('https://media3.giphy.com/media/NNmJyVWriRDlS/giphy.gif?cid=ecf05e47msz9qfggnyvjjiks48tni8pfqqzumn1ebusf5681&ep=v1_gifs_search&rid=giphy.gif&ct=g');
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -123,6 +123,7 @@ body {
   height: 98px;
   margin-right: 15px;
   border-radius: 10%;
+  border-top: #b8b8b8 3px solid;
   border-bottom: #b8b8b8 3px solid;
   font-size: 1rem;
   //animation: color 1s ease-in-out infinite;

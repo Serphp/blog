@@ -42,10 +42,29 @@ li::marker {
     
 }
 
+strong {
+    font-weight: 700;
+    color: #6658d5ce;
+    font-size: 1.1rem;
+    word-spacing: 2px;
+    text-align: justify;
+}
 em {
     //margin: 5px;
-    font-style: italic;
+    font-style: normal;
+    font-weight: 600;
+    color: #b9b9b96b;
+}
+
+#text {
+    font-size: 1.5rem;
     color: #ffffff;
+    text-align: justify;
+    font-weight: 400;
+    margin: 10px 0px 10px 0px;
+    @media screen and (max-width: 768px) {
+        font-size: 1rem;
+    }
 }
 
 li {
@@ -123,6 +142,13 @@ li {
     100% {
         border-right: 2px solid #72afde;
     }
+}
+
+.ccategory {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    align-items: center;
 }
 
 .protect {
@@ -347,13 +373,14 @@ h4 {
 }
 
 h2 {
-    font-family: Fellix, sans-serif !important;
-    font-size: 1.5rem;
+    //font-family: Fellix, sans-serif !important;
+    font-family: monospace;
+    font-size: 1.8rem;
     margin: 20px 0 20px 0;
     font-weight: 600;
     color: #b1b1b1;
     &::before {
-        content: '> ';
+        content: '/ ';
         color: #72afde;
         font-size: 1.5rem;
         font-weight: 600;

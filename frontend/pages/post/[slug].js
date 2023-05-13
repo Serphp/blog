@@ -157,16 +157,16 @@ return (
 <section className=''>
 
     <section className="p-10 md-p-10 contenedor">
-            <div className="card3 flex flex-wrap md-justify-between md-items-center">
+            <div className="card3">
             <div className="flex items-center">
                 <img className="imgavatar w-40 h-40 br-50 mr-5" src={urlFor(authorImage).width(100).height(100).fit('max').auto('format')} alt={name} />
                 <span className="titlepost">{name}</span>
             </div>
-            <div className="flex items-center mt-5 md-mt-0">
+            <div className="ccategory">
                 <span className="icon">
                 <ion-icon name="caret-forward-outline"></ion-icon>
                     </span>
-                <div className="flex flex-wrap">
+                <div className="">
                     {categories.map((category, index) => (
                         <span key={index} className="titlepost">{category}</span>
                     ))}
