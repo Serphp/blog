@@ -1,6 +1,6 @@
 /* eslint-disable react/no-unknown-property */
 /* eslint-disable jsx-a11y/alt-text */
-import React, { useContext, useEffect  } from 'react';
+import React, { useContext  } from 'react';
 import { PuppyContext } from '../Context/PuppyContext';
 
 // interface CatState {
@@ -12,20 +12,23 @@ import { PuppyContext } from '../Context/PuppyContext';
 // }
 
 const Footer: React.FC = () => {
-  const { cat, 
-    handleMoveCat, handleStart, formatTime } = useContext(PuppyContext);
+  const { 
+      cat, 
+      handleStart, 
+      formatTime 
+    } = useContext(PuppyContext);
 
   return (
-    <footer>
-      <div className='fondo'>
-        <div className={`thinkcont ${cat.showText ? '' : 'hidden'}`}>
+    <>
+
+        {/* <div className={`thinkcont ${cat.showText ? '' : 'hidden'}`}>
           <div className={`think ${cat.showText ? '' : 'hidden'}`}>
             {cat.texto}
           </div>
         </div>
 
         <div className='cat' style={{ position: 'absolute', left: `${cat.position}px` }}>
-          {/* <div style={{ display: `${cat.Playing ? 'block' : 'none'}` }}> */}
+
             <div style={{ position: 'absolute', top: `${-cat.Jump}px` }}>
           <img
             className={cat.isMoving ? 'moving' : ''}
@@ -34,23 +37,21 @@ const Footer: React.FC = () => {
             onClick={handleStart}
             title='dont touch me!'
           />
-          </div>
-          {/* </div> */}
-        </div>
+        </div> */}
 
-<section className='social'>
+<section>
 <div className='puppycontainer'>
+
 <div className='puppyhome'>
-   
+
   </div>
 
-  <p className='copy'>
-          © 2021 PuppyCat <br />
-          Serphp
-        </p>
+  <div className='copy'>
+          
+        </div>
 
       <div className='puppy'>
-        Lectura <br/>
+        <div className='puppylitte'>Lectura</div> 
         {formatTime(cat.Time)}
         </div>
   </div>
@@ -79,8 +80,9 @@ const Footer: React.FC = () => {
             visibility: hidden;
           }
         `}</style>
-      </div>
-    </footer>
+      {/* </div> */}
+      
+    </>
   );
 };
 
