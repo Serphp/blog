@@ -70,8 +70,10 @@ em {
 li {
     font-size: 1rem;
     color: #aaaaaa;
+    margin-bottom: 15px;
+    padding-left: 10px;
     text-align: justify;
-    border-left: #ffffff30 solid 5px;
+    border-left: #2e0549b1 solid 3px;
     border-radius: 10px;
 }
 
@@ -94,12 +96,12 @@ li {
 }
 
 .card3 {
-    width: 100%;
+    width: 90%;
     color: #b6b6b6;
     margin: 10px 0px 10px 0px;
     padding: 20px;
     border-radius: 10px;
-    background-color: rgba(255, 255, 255, 0.119);
+    background-color: rgba(255, 255, 255, 0.178);
     @media screen and (min-width: 768px) {
         width: 90%;
     }

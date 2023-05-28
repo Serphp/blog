@@ -14,7 +14,7 @@ import { PuppyContext } from '../Context/PuppyContext';
 const Footer: React.FC = () => {
   const { 
       cat, 
-      handleStart, 
+      // handleStart, 
       formatTime 
     } = useContext(PuppyContext);
 
@@ -50,7 +50,7 @@ const Footer: React.FC = () => {
           
         </div>
 
-      <div className='puppy'>
+      <div className='puppy m-5'>
         <div className='puppylitte'>Lectura</div> 
         {formatTime(cat.Time)}
         </div>

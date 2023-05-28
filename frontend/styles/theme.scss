@@ -2,12 +2,12 @@
 [data-theme="dark"] {
     body {
         margin: auto;
-        //background-image: url('https://www.platoapp.com/assets/images/Stars2.svg');
+        background-image: url('https://www.platoapp.com/assets/images/Stars2.svg');
         background-attachment: fixed;
         background-color: #050509ee !important;
-        transition: background-color 0.5s ease;
         font-family: 'Roboto', sans-serif;
         opacity: 0.9;
+        transition: all 0.5s ease;
         @media screen and (max-width: 1200px) {
           width: 100%;
         }
@@ -18,7 +18,7 @@
         }
         .fondo {
             background-color: #05050904;
-            //opacity: 0.8;
+            opacity: 0.8;
         }
     }
 }
@@ -26,12 +26,12 @@
 [data-theme="light"] {
     body {
         margin: auto;
-        //background-image: url('https://www.platoapp.com/assets/images/Stars-1.svg');
-        //background-attachment: fixed;
+        background-image: url('https://www.platoapp.com/assets/images/Stars-1.svg');
+        background-attachment: fixed;
         background-color: #160b34;
         //background linear
         //background: linear-gradient(90deg, #160b35 40%, #150a31 50%) !important;
-        transition: background-color 0.5s ease;
+        transition: all 0.5s ease;
         font-family: 'Roboto', sans-serif;
         @media screen and (max-width: 1200px) {
           width: 100%;

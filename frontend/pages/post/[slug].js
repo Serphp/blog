@@ -156,7 +156,7 @@ const PortableText = require('@portabletext/react').PortableText;
 return (    
 <section className=''>
 
-    <section className="p-10 md-p-10 contenedor">
+    <article className="md-p-10 contenedor">
             <div className="card3">
             <div className="flex items-center">
                 <img className="imgavatar w-40 h-40 br-50 mr-5" src={urlFor(authorImage).width(100).height(100).fit('max').auto('format')} alt={name} />
@@ -238,7 +238,7 @@ return (
                 </div> 
         </div>
         {isButtonVisible && (<button className='buttonabsolute' onClick={HMarktext}>+</button>)}
-    </section>
+    </article>
     <div className='p-10'></div>
         </section>
         
